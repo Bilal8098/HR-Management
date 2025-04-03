@@ -3,6 +3,7 @@ module com.example.hrmanagement {
     requires javafx.fxml;
     requires javafx.base;
     requires java.sql;
+    requires javafx.graphics;
 
     opens com.example.hrmanagement to javafx.fxml;  // Ensure reflection access to your package
     exports com.example.hrmanagement;  // Expose your package to other modules

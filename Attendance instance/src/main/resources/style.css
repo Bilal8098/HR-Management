@@ -13,6 +13,11 @@
     -fx-text-fill: red;
     -fx-font-size: 13px;
 }
+.col{
+    -fx-border-color: #ffcc00;
+    -fx-border-width: 2px; 
+    -fx-border-radius: 5px;
+}
 /* Style TextFields and PasswordFields */
 .text-field, .password-field {
     -fx-background-color: #1e1e1e;
