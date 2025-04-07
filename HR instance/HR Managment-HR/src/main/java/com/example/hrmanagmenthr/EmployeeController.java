@@ -1,5 +1,9 @@
 package com.example.hrmanagmenthr;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,32 +11,81 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 @SuppressWarnings("ALL")
 public class EmployeeController {
+     @FXML private Pane titleBar;
+    @FXML private Button closeButton;
+    @FXML private Button minimizeButton;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
-    public HBox topBar;
-    @FXML private TextField searchField;
-    @FXML private TableView<Employee> employeeTable;
-    @FXML private TableColumn<Employee, Integer> idCol;
-    @FXML private TableColumn<Employee, String> nameCol;
-    @FXML private TableColumn<Employee, String> emailCol;
-    @FXML private TableColumn<Employee, String> phoneCol;
-    @FXML private TableColumn<Employee, String> addressCol;
-    @FXML private TableColumn<Employee, Double> salaryCol;
-    @FXML private TableColumn<Employee, Void> actionCol;
+    @FXML
+    private void closeWindow() {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
 
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) minimizeButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    // Four separate search fields from FXML
+    @FXML
+    private TextField searchField;      // For ID
+    @FXML
+    private TextField searchField1;     // For Full Name
+    @FXML
+    private TextField searchField11;    // For Email
+    @FXML
+    private TextField searchField111;   // For Phone
+
+    @FXML
+    private TableView<Employee> employeeTable;
+    
+    @FXML
+    private TableColumn<Employee, Integer> idCol;
+    
+    @FXML
+    private TableColumn<Employee, String> nameCol;
+    
+    @FXML
+    private TableColumn<Employee, String> emailCol;
+    
+    @FXML
+    private TableColumn<Employee, String> phoneCol;
+    
+    @FXML
+    private TableColumn<Employee, String> addressCol;
+    
+    @FXML
+    private TableColumn<Employee, Double> salaryCol;
+    
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
 
     public void initialize() {
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+        // Set up cell value factories
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -40,14 +93,15 @@ public class EmployeeController {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         salaryCol.setCellValueFactory(new PropertyValueFactory<>("salary"));
 
+        // Set items to table and load data
         employeeTable.setItems(employees);
         loadAllEmployees();
-        addActionButtonsToTable();
 
-        // Apply the CSS file
-        Scene scene = employeeTable.getScene();
-        if (scene != null) {
-            scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        // If the scene is already set, add the stylesheet.
+        if (employeeTable.getScene() != null) {
+            employeeTable.getScene().getStylesheets().add(
+                getClass().getResource("styles.css").toExternalForm()
+            );
         }
     }
 
@@ -64,7 +118,6 @@ public class EmployeeController {
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getDouble("salary"),
-                        rs.getBytes("cv"),
                         rs.getString("password"),
                         rs.getBytes("fingerprint")
                 ));
@@ -74,66 +127,75 @@ public class EmployeeController {
         }
     }
 
-    private void addActionButtonsToTable() {
-        actionCol.setCellFactory(param -> new TableCell<>() {
-            private final Button updateBtn = new Button("Update");
-            private final Button deleteBtn = new Button("Delete");
-
-            {
-                updateBtn.getStyleClass().add("loginButton");
-                deleteBtn.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
-
-                updateBtn.setOnAction(event -> {
-                    Employee emp = getTableView().getItems().get(getIndex());
-                    updateEmployee(emp);
-                });
-
-                deleteBtn.setOnAction(event -> {
-                    Employee emp = getTableView().getItems().get(getIndex());
-                    deleteEmployee(emp);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    HBox buttons = new HBox(10, updateBtn, deleteBtn);
-                    setGraphic(buttons);
-                }
-            }
-        });
-    }
-
+    /**
+     * The Search button action.
+     * Combines search criteria from 4 text fields using OR logic.
+     */
     public void handleSearch(ActionEvent event) {
-        String keyword = searchField.getText().trim();
+        // Retrieve values from the search fields
+        String idKeyword = searchField.getText().trim();
+        String nameKeyword = searchField1.getText().trim();
+        String emailKeyword = searchField11.getText().trim();
+        String phoneKeyword = searchField111.getText().trim();
+        
+        // If a field is empty, replace with "%" which matches anything.
+        // Otherwise, wrap the keyword with "%" for partial matching.
+        idKeyword = idKeyword.isEmpty() ? "%" : idKeyword; // For ID, use exact match if provided
+        nameKeyword = nameKeyword.isEmpty() ? "%" : "%" + nameKeyword + "%";
+        emailKeyword = emailKeyword.isEmpty() ? "%" : "%" + emailKeyword + "%";
+        phoneKeyword = phoneKeyword.isEmpty() ? "%" : "%" + phoneKeyword + "%";
+        
+        // Log parameters for debugging
+        System.out.println("Searching with: ID: " + idKeyword + ", FullName: " + nameKeyword +
+                           ", Email: " + emailKeyword + ", Phone: " + phoneKeyword);
+        
         employees.clear();
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM employees WHERE fullname ILIKE ?";
+            // Query construction: if ID is not "%" (i.e., user entered a specific ID), use exact match
+            String query;
+            if (idKeyword.equals("%")) {
+                query = "SELECT * FROM employees WHERE fullname LIKE ? AND email LIKE ? AND phone LIKE ?";
+            } else {
+                query = "SELECT * FROM employees WHERE employeeid = ? AND fullname LIKE ? AND email LIKE ? AND phone LIKE ?";
+            }
+            
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, "%" + keyword + "%");
+            
+            // Set parameters based on whether we have a specific ID
+            if (idKeyword.equals("%")) {
+                stmt.setString(1, nameKeyword);
+                stmt.setString(2, emailKeyword);
+                stmt.setString(3, phoneKeyword);
+            } else {
+                stmt.setInt(1, Integer.parseInt(idKeyword)); // Assuming employeeid is an integer
+                stmt.setString(2, nameKeyword);
+                stmt.setString(3, emailKeyword);
+                stmt.setString(4, phoneKeyword);
+            }
+            
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                employees.add(new Employee(
-                        rs.getInt("employeeid"),
-                        rs.getString("fullname"),
-                        rs.getString("email"),
-                        rs.getString("phone"),
-                        rs.getString("address"),
-                        rs.getDouble("salary"),
-                        rs.getBytes("cv"),
-                        rs.getString("password"),
-                        rs.getBytes("fingerprint")
-                ));
+                int employeeId = rs.getInt("employeeid");
+                String fullName = rs.getString("fullname");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String address = rs.getString("address");
+                double salary = rs.getDouble("salary");
+                String password = rs.getString("password");
+                byte[] fingerprint = rs.getBytes("fingerprint");                
+                employees.add(new Employee(employeeId, fullName, email, phone, address, salary, password, fingerprint));
             }
+    
+            // Log if no data is returned
+            if (employees.isEmpty()) {
+                System.out.println("No matching data found.");
+            }
+            // Set the table data
             employeeTable.setItems(employees);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
+    }    
     public void handleAddEmployee(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
@@ -146,27 +208,65 @@ public class EmployeeController {
         }
     }
 
-    public void deleteEmployee(Employee emp) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this employee?", ButtonType.YES, ButtonType.NO);
+    /**
+     * Called when the external Delete button is pressed.
+     */
+    public void deleteEmployee() {
+        Employee selectedEmp = employeeTable.getSelectionModel().getSelectedItem();
+        if (selectedEmp == null) {
+            showAlert("Please select an employee to delete.");
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, 
+                "Are you sure you want to delete this employee?", 
+                ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
+
         if (alert.getResult() == ButtonType.YES) {
             try (Connection conn = DatabaseConnection.getConnection()) {
-                PreparedStatement stmt = conn.prepareStatement("DELETE FROM employee WHERE employeeid = ?");
-                stmt.setInt(1, emp.getId());
-                stmt.executeUpdate();
-                employees.remove(emp);
+                conn.setAutoCommit(false);
+                try (PreparedStatement stmt1 = conn.prepareStatement("DELETE FROM salary WHERE employeeid = ?");
+                     PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM attendance WHERE employeeid = ?")) {
+
+                    stmt1.setInt(1, selectedEmp.getId());
+                    stmt2.setInt(1, selectedEmp.getId());
+                    stmt1.executeUpdate();
+                    stmt2.executeUpdate();
+
+                    try (PreparedStatement stmt3 = conn.prepareStatement("DELETE FROM employees WHERE employeeid = ?")) {
+                        stmt3.setInt(1, selectedEmp.getId());
+                        stmt3.executeUpdate();
+                    }
+                    conn.commit();
+                    employees.remove(selectedEmp);
+                } catch (Exception e) {
+                    conn.rollback();
+                    e.printStackTrace();
+                } finally {
+                    conn.setAutoCommit(true);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void updateEmployee(Employee emp) {
+    /**
+     * Called when the external Update button is pressed.
+     */
+    public void updateEmployee() {
+        Employee selectedEmp = employeeTable.getSelectionModel().getSelectedItem();
+        if (selectedEmp == null) {
+            showAlert("Please select an employee to update.");
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateEmployee.fxml"));
             Parent root = loader.load();
             UpdateEmployeeController controller = loader.getController();
-            controller.setEmployee(emp);
+            controller.setEmployee(selectedEmp);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Update Employee");
@@ -174,5 +274,16 @@ public class EmployeeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Helper method to show alerts.
+     */
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

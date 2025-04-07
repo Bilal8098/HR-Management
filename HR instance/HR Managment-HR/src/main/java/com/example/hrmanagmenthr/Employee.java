@@ -7,18 +7,16 @@ public class Employee {
     private String phone;
     private String address;
     private double salary;
-    private byte[] cv;
     private String password;
     private byte[] fingerprint;
 
-    public Employee(int id, String fullName, String email, String phone, String address, double salary, byte[] cv, String password, byte[] fingerprint) {
+    public Employee(int id, String fullName, String email, String phone, String address, double salary, String password, byte[] fingerprint) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.salary = salary;
-        this.cv = cv;
         this.password = password;
         this.fingerprint = fingerprint;
     }
@@ -42,6 +40,5 @@ public class Employee {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public byte[] getCv() { return cv; }
     public byte[] getFingerprint() { return fingerprint; }
 }

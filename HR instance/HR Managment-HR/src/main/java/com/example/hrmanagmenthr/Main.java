@@ -1,13 +1,15 @@
 package com.example.hrmanagmenthr;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
     @Override
@@ -34,7 +36,9 @@ public class Main extends Application {
             scene.getStylesheets().add(cssUrl.toExternalForm());
             primaryStage.setTitle("Employee Manager");
             primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
+             primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
         }
     }
 

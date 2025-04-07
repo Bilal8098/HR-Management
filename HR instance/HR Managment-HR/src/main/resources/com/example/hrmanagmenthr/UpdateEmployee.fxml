@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hrmanagmenthr.UpdateEmployeeController"
-      spacing="10" styleClass="update-employee-form">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-    <Label text="Update Employee" styleClass="label"/>
+<VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="355.0" spacing="10" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.hrmanagmenthr.UpdateEmployeeController">
 
-    <TextField fx:id="fullName" promptText="Full Name" styleClass="text-field"/>
-    <TextField fx:id="email" promptText="Email" styleClass="text-field"/>
-    <TextField fx:id="phone" promptText="Phone" styleClass="text-field"/>
-    <TextField fx:id="address" promptText="Address" styleClass="text-field"/>
-    <TextField fx:id="salary" promptText="Salary" styleClass="text-field"/>
-    <PasswordField fx:id="password" promptText="Password" styleClass="password-field"/>
+    <Label alignment="CENTER" styleClass="label" text="Update Employee" />
 
-    <Button text="Update CV" onAction="#handleUploadCV" styleClass="loginButton"/>
-    <Button text="Update Fingerprint" onAction="#handleUploadFingerprint" styleClass="loginButton"/>
-    <Button text="Save Update" onAction="#handleUpdate" styleClass="loginButton"/>
+    <TextField fx:id="fullName" prefHeight="38.0" prefWidth="281.0" promptText="Full Name" styleClass="text-field" />
+    <TextField fx:id="email" promptText="Email" styleClass="text-field" />
+    <TextField fx:id="phone" promptText="Phone" styleClass="text-field" />
+    <TextField fx:id="address" promptText="Address" styleClass="text-field" />
+    <TextField fx:id="salary" promptText="Salary" styleClass="text-field" />
+    <PasswordField fx:id="password" promptText="Password" styleClass="password-field" />
+    <Button contentDisplay="CENTER" onAction="#handleUpdate" prefHeight="44.0" prefWidth="182.0" styleClass="loginButton" text="Save Update" />
 </VBox>
