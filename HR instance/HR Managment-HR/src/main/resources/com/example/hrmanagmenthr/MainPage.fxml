@@ -1,0 +1,28 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hrmanagmenthr.EmployeeController">
+
+  <top>
+    <HBox fx:id="topBar" spacing="10" styleClass="top-bar">
+      <TextField fx:id="searchField" promptText="Search by Full Name"/>
+      <Button text="Search" onAction="#handleSearch" styleClass="loginButton"/>
+      <Button text="Add Employee" onAction="#handleAddEmployee" styleClass="loginButton"/>
+    </HBox>
+  </top>
+
+  <center>
+    <TableView fx:id="employeeTable">
+      <columns>
+        <TableColumn fx:id="idCol" text="ID"/>
+        <TableColumn fx:id="nameCol" text="Full Name"/>
+        <TableColumn fx:id="emailCol" text="Email"/>
+        <TableColumn fx:id="phoneCol" text="Phone"/>
+        <TableColumn fx:id="addressCol" text="Address"/>
+        <TableColumn fx:id="salaryCol" text="Salary"/>
+        <TableColumn fx:id="actionCol" text="Actions"/>
+      </columns>
+    </TableView>
+  </center>
+</BorderPane>
