@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="591.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="252.0" layoutY="347.0" mnemonicParsing="false" onAction="#deduct" styleClass="loginButton" text="Deduct" />
+      <TextField fx:id="mainSalary" editable="false" layoutX="100.0" layoutY="46.0" />
+      <Label layoutX="134.0" layoutY="14.0" text="Main salary" />
+      <TextField fx:id="actualSalary" editable="false" layoutX="320.0" layoutY="46.0" />
+      <Label layoutX="348.0" layoutY="14.0" text="Actual salary" />
+      <TextField fx:id="deductionAmount" layoutX="209.0" layoutY="137.0" />
+      <Label layoutX="227.0" layoutY="104.0" text="Deduction amount" />
+      <TextField fx:id="reasonField" layoutX="162.0" layoutY="213.0" prefHeight="108.0" prefWidth="283.0" />
+      <Label layoutX="276.0" layoutY="181.0" text="Reason" />
+   </children>
+</AnchorPane>

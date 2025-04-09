@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.SalariesController">
+   <children>
+      <TableView fx:id="salaryTable" layoutX="10.0" layoutY="65.0" prefHeight="321.0" prefWidth="654.0">
+        <columns>
+          <TableColumn prefWidth="109.0" text="Employee ID" />
+          <TableColumn prefWidth="101.0" text="Main salary" />
+            <TableColumn prefWidth="101.0" text="Actual salary" />
+            <TableColumn prefWidth="149.0" text="Difference amount" />
+            <TableColumn prefWidth="96.0" text="Type" />
+            <TableColumn prefWidth="96.0" text="Reason" />
+        </columns>
+      </TableView>
+      <Button layoutX="51.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToDeduction" styleClass="loginButton" text="Deduct" />
+      <Button layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRaise" styleClass="loginButton" text="Raise" />
+      <Button layoutX="514.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRaiseAll" styleClass="loginButton" text="Raise for all" />
+   </children>
+</AnchorPane>

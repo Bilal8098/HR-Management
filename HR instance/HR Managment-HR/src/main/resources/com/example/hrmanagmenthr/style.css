@@ -23,7 +23,10 @@
     -fx-text-fill: red;
     -fx-font-size: 13px;
 }
-
+#box{
+    -fx-justify-content: "space-between";
+    -fx-display: "flex";
+}
 /* Style TextFields and PasswordFields */
 .text-field, .password-field {
     -fx-background-color: #1e1e1e;

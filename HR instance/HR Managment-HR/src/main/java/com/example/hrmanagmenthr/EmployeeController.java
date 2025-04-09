@@ -261,7 +261,6 @@ public class EmployeeController {
             showAlert("Please select an employee to update.");
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateEmployee.fxml"));
             Parent root = loader.load();
@@ -275,7 +274,18 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
-
+    public void viewSalaries(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SalariesTable.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Salaries");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Helper method to show alerts.
      */
