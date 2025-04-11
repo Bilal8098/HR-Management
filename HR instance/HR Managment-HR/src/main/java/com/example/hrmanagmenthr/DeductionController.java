@@ -47,15 +47,7 @@ public class DeductionController implements Initializable {
             double deductionValue = Double.parseDouble(deductionAmount.getText());
             double newSalary = Double.parseDouble(actualSal) - deductionValue;
             String reason = reasonField.getText();
-
-            // 1. Update actual salary
-            String updateSql = "UPDATE salary SET actualSalary = actualSalary - ? WHERE employeeID = ?";
-            PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-            updateStmt.setDouble(1, deductionValue);
-            updateStmt.setInt(2, employeeID);
-            updateStmt.executeUpdate();
-
-            // 2. Insert deduction log
+    
             String insertSql = """
                 INSERT INTO Salary (
                     EmployeeID,
@@ -65,7 +57,7 @@ public class DeductionController implements Initializable {
                     Reason
                 ) VALUES (?, ?, ?, ?, ?)
             """;
-
+    
             PreparedStatement insertStmt = conn.prepareStatement(insertSql);
             insertStmt.setInt(1, employeeID);
             insertStmt.setDouble(2, newSalary);
@@ -73,10 +65,10 @@ public class DeductionController implements Initializable {
             insertStmt.setString(4, "Deduction");
             insertStmt.setString(5, reason.isEmpty() ? "No reason provided" : reason);
             insertStmt.executeUpdate();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Salaries deducted successfully");
+    
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deduction recorded successfully");
             alert.show();
-
+    
         } catch (Exception e) {
             e.printStackTrace();
         }

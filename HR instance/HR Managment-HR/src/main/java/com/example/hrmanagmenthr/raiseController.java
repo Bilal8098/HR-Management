@@ -3,7 +3,6 @@ package com.example.hrmanagmenthr;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -49,14 +48,7 @@ public class raiseController implements Initializable {
             double raiseValue = Double.parseDouble(raiseAmount.getText());
             double newSalary = Double.parseDouble(actualSal) + raiseValue;
             String reason = reasonField.getText();
-
-            // 1. Update actualSalary in SALARY table
-            String updateSql = "UPDATE salary SET actualSalary = actualSalary + ? WHERE employeeID = ?";
-            PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-            updateStmt.setDouble(1, raiseValue);
-            updateStmt.setInt(2, employeeID);
-            updateStmt.executeUpdate();
-
+    
             String insertSql = """
                 INSERT INTO Salary (
                     EmployeeID,
@@ -66,7 +58,7 @@ public class raiseController implements Initializable {
                     Reason
                 ) VALUES (?, ?, ?, ?, ?)
             """;
-
+    
             PreparedStatement insertStmt = conn.prepareStatement(insertSql);
             insertStmt.setInt(1, employeeID);
             insertStmt.setDouble(2, newSalary);
@@ -74,10 +66,10 @@ public class raiseController implements Initializable {
             insertStmt.setString(4, "Raise");
             insertStmt.setString(5, reason.isEmpty() ? "No reason provided" : reason);
             insertStmt.executeUpdate();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Salaries raised successfully");
+    
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Salary raise recorded successfully");
             alert.show();
-
+    
         } catch (Exception e) {
             e.printStackTrace();
         }

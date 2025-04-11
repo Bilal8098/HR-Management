@@ -5,10 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="318.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.RaiseAllController">
-   <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="151.0" mnemonicParsing="false" onAction="#raiseAll" styleClass="loginButton" text="Raise" />
-      <Label layoutX="107.0" layoutY="32.0" text="Add the value" />
-      <TextField fx:id="value" layoutX="72.0" layoutY="88.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0"
+            prefWidth="318.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.RaiseAllController">
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="151.0" mnemonicParsing="false"
+           onAction="#raiseAll" styleClass="loginButton" text="Raise"/>
+   <Label layoutX="107.0" layoutY="32.0" text="Add the value"/>
+   <TextField fx:id="value" layoutX="72.0" layoutY="88.0"/>
 </AnchorPane>

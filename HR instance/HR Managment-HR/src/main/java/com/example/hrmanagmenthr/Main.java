@@ -38,7 +38,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
-             primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
         }
     }
 

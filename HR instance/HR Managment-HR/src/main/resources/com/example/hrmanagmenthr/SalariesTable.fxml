@@ -17,8 +17,7 @@
             <TableColumn prefWidth="96.0" text="Reason" />
         </columns>
       </TableView>
-      <Button layoutX="51.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToDeduction" styleClass="loginButton" text="Deduct" />
-      <Button layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRaise" styleClass="loginButton" text="Raise" />
-      <Button layoutX="514.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRaiseAll" styleClass="loginButton" text="Raise for all" />
+      <Button layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToDeduction" styleClass="loginButton" text="Deduct" />
+      <Button layoutX="164.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRaise" prefHeight="40.0" prefWidth="88.0" styleClass="loginButton" text="Raise" />
    </children>
 </AnchorPane>

@@ -53,25 +53,25 @@ public class EmployeeController {
 
     @FXML
     private TableView<Employee> employeeTable;
-    
+
     @FXML
     private TableColumn<Employee, Integer> idCol;
-    
+
     @FXML
     private TableColumn<Employee, String> nameCol;
-    
+
     @FXML
     private TableColumn<Employee, String> emailCol;
-    
+
     @FXML
     private TableColumn<Employee, String> phoneCol;
-    
+
     @FXML
     private TableColumn<Employee, String> addressCol;
-    
+
     @FXML
     private TableColumn<Employee, Double> salaryCol;
-    
+
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -137,18 +137,18 @@ public class EmployeeController {
         String nameKeyword = searchField1.getText().trim();
         String emailKeyword = searchField11.getText().trim();
         String phoneKeyword = searchField111.getText().trim();
-        
+
         // If a field is empty, replace with "%" which matches anything.
         // Otherwise, wrap the keyword with "%" for partial matching.
         idKeyword = idKeyword.isEmpty() ? "%" : idKeyword; // For ID, use exact match if provided
         nameKeyword = nameKeyword.isEmpty() ? "%" : "%" + nameKeyword + "%";
         emailKeyword = emailKeyword.isEmpty() ? "%" : "%" + emailKeyword + "%";
         phoneKeyword = phoneKeyword.isEmpty() ? "%" : "%" + phoneKeyword + "%";
-        
+
         // Log parameters for debugging
         System.out.println("Searching with: ID: " + idKeyword + ", FullName: " + nameKeyword +
                            ", Email: " + emailKeyword + ", Phone: " + phoneKeyword);
-        
+
         employees.clear();
         try (Connection conn = DatabaseConnection.getConnection()) {
             // Query construction: if ID is not "%" (i.e., user entered a specific ID), use exact match
@@ -158,9 +158,9 @@ public class EmployeeController {
             } else {
                 query = "SELECT * FROM employees WHERE employeeid = ? AND fullname LIKE ? AND email LIKE ? AND phone LIKE ?";
             }
-            
+
             PreparedStatement stmt = conn.prepareStatement(query);
-            
+
             // Set parameters based on whether we have a specific ID
             if (idKeyword.equals("%")) {
                 stmt.setString(1, nameKeyword);
@@ -172,7 +172,7 @@ public class EmployeeController {
                 stmt.setString(3, emailKeyword);
                 stmt.setString(4, phoneKeyword);
             }
-            
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int employeeId = rs.getInt("employeeid");
@@ -182,10 +182,10 @@ public class EmployeeController {
                 String address = rs.getString("address");
                 double salary = rs.getDouble("salary");
                 String password = rs.getString("password");
-                byte[] fingerprint = rs.getBytes("fingerprint");                
+                byte[] fingerprint = rs.getBytes("fingerprint");
                 employees.add(new Employee(employeeId, fullName, email, phone, address, salary, password, fingerprint));
             }
-    
+
             // Log if no data is returned
             if (employees.isEmpty()) {
                 System.out.println("No matching data found.");
@@ -195,7 +195,7 @@ public class EmployeeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }    
+    }
     public void handleAddEmployee(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
@@ -218,8 +218,8 @@ public class EmployeeController {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, 
-                "Are you sure you want to delete this employee?", 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete this employee?",
                 ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
@@ -274,18 +274,31 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
-    public void viewSalaries(){
+    public void viewSalaries() {
+        Employee selectedEmp = employeeTable.getSelectionModel().getSelectedItem();
+
+        if (selectedEmp == null) {
+            showAlert("Please select an employee to view salaries.");
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SalariesTable.fxml"));
             Parent root = loader.load();
+
+            // Get controller and pass employee
+            SalariesController controller = loader.getController();
+            controller.setEmployee(selectedEmp);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Salaries");
+            stage.setTitle("Salaries - " + selectedEmp.getFullName());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Helper method to show alerts.
      */
@@ -296,4 +309,50 @@ public class EmployeeController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    public void openraiseValuePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("raiseValue.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Raise Salaries for All Employees");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Failed to open Raise All page.");
+        }
+    }
+    @FXML
+    private TextField value;
+
+    @FXML
+    public void raiseAll() {
+        try {
+            double raiseAmount = Double.parseDouble(value.getText().trim());
+
+            try (Connection conn = DatabaseConnection.getConnection()) {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE employees SET salary = salary + ?");
+                stmt.setDouble(1, raiseAmount);
+                int rowsUpdated = stmt.executeUpdate();
+
+                showAlert(rowsUpdated + " employees got a raise of " + raiseAmount + " successfully.");
+            }
+
+            // Close the raise window
+            Stage stage = (Stage) value.getScene().getWindow();
+            stage.close();
+
+            // Reload table data
+            loadAllEmployees();
+
+        } catch (NumberFormatException e) {
+            showAlert("Please enter a valid number.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Failed to apply raise.");
+        }
+    }
+
+
+
 }
