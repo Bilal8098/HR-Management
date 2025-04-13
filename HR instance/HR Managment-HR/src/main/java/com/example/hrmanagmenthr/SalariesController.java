@@ -19,7 +19,7 @@ public class SalariesController {
     @FXML
     private TableView<EmployeeSalary> salaryTable;
 
-    private Employee selectedEmployee; // 👈 to hold selected employee
+    private Employee selectedEmployee; // holds the selected employee
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -42,23 +42,26 @@ public class SalariesController {
         }
     }
 
+    // Automatically use the latest salary record (the first record in the table) for deduction.
     public void goToDeduction() {
         try {
-            EmployeeSalary selectedItem = salaryTable.getSelectionModel().getSelectedItem();
-            if (selectedItem == null) {
-                showAlert("Select an employee");
+            ObservableList<EmployeeSalary> items = salaryTable.getItems();
+            if (items.isEmpty()) {
+                showAlert("No salary record available.");
                 return;
             }
+            // Automatically take the latest record (ordered descending in SQL)
+            EmployeeSalary record = items.get(0);
 
-            String mainSalary = selectedItem.getMainSalary();
-            String actualSalary = selectedItem.getActualSalary();
-            int employeeID = selectedItem.getEmployeeID();
+            String mainSalary = record.getMainSalary();
+            String actualSalary = record.getActualSalary();
+            int employeeID = record.getEmployeeID();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("deduction.fxml"));
             DeductionController controller = new DeductionController(mainSalary, actualSalary, employeeID);
             loader.setController(controller);
 
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Deduct employee");
@@ -68,26 +71,29 @@ public class SalariesController {
         }
     }
 
+    // Automatically use the latest salary record (the first record in the table) for raise.
     public void goToRaise() {
         try {
-            EmployeeSalary selectedItem = salaryTable.getSelectionModel().getSelectedItem();
-            if (selectedItem == null) {
-                showAlert("Select an employee");
+            ObservableList<EmployeeSalary> items = salaryTable.getItems();
+            if (items.isEmpty()) {
+                showAlert("No salary record available.");
                 return;
             }
+            // Automatically take the latest record (ordered descending in SQL)
+            EmployeeSalary record = items.get(0);
 
-            String mainSalary = selectedItem.getMainSalary();
-            String actualSalary = selectedItem.getActualSalary();
-            int employeeID = selectedItem.getEmployeeID();
+            String mainSalary = record.getMainSalary();
+            String actualSalary = record.getActualSalary();
+            int employeeID = record.getEmployeeID();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("raise.fxml"));
             raiseController controller = new raiseController(mainSalary, actualSalary, employeeID);
             loader.setController(controller);
 
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("raise employee");
+            stage.setTitle("Raise employee");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +102,7 @@ public class SalariesController {
 
     @FXML
     public void initialize() {
-        // Bind columns here
+        // Bind columns assuming the column order matches your FXML design.
         TableColumn<EmployeeSalary, String> colEmployeeID = (TableColumn<EmployeeSalary, String>) salaryTable.getColumns().get(0);
         TableColumn<EmployeeSalary, String> colMainSalary = (TableColumn<EmployeeSalary, String>) salaryTable.getColumns().get(1);
         TableColumn<EmployeeSalary, String> colActualSalary = (TableColumn<EmployeeSalary, String>) salaryTable.getColumns().get(2);
@@ -112,18 +118,25 @@ public class SalariesController {
         colReason.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getReason()));
     }
 
-    // ✅ NEW: This method will be called from the main controller
+    // Called from the main controller to set the current employee and load all their salary records.
     public void setEmployee(Employee employee) {
         this.selectedEmployee = employee;
         loadSalaryData(employee.getId());
     }
 
-    // ✅ NEW: Load only salary data for the selected employee
+    // Load all salary records for the given employee from PostgreSQL.
     private void loadSalaryData(int employeeId) {
         try {
             Connection conn = DatabaseConnection.getConnection();
-            String sql = "SELECT s.EmployeeID, e.Salary AS MainSalary, s.ActualSalary, s.DifferenceAmount, s.DeductionOrRaise, s.Reason " +
-                    "FROM Salary s JOIN Employees e ON s.EmployeeID = e.EmployeeID WHERE s.EmployeeID = ?";
+            // Remove the LIMIT clause to fetch all records for the employee.
+            // The records are ordered with the latest (by SalaryID descending or a date column) at the top.
+            String sql = "SELECT s.EmployeeID, e.Salary AS MainSalary, s.ActualSalary, s.DifferenceAmount, " +
+                         "s.DeductionOrRaise, s.Reason " +
+                         "FROM Salary s " +
+                         "JOIN Employees e ON s.EmployeeID = e.EmployeeID " +
+                         "WHERE s.EmployeeID = ? " +
+                         "ORDER BY s.SalaryID DESC";  // You can change this to a date column if available.
+
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, employeeId);
             ResultSet rs = stmt.executeQuery();
@@ -139,7 +152,6 @@ public class SalariesController {
 
                 list.add(new EmployeeSalary(id, mainSalary, actual, diff, type, reason));
             }
-
             salaryTable.setItems(list);
         } catch (Exception e) {
             e.printStackTrace();

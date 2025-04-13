@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="677.0" prefWidth="924.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.EmployeeController">
@@ -21,13 +22,18 @@
             <TableColumn fx:id="salaryCol" prefWidth="136.0" text="Salary" />
         </columns>
     </TableView>
-    
-    <!-- Buttons (placed outside the TableView) -->
-    <Button layoutX="177.0" layoutY="83.0" onAction="#handleAddEmployee" styleClass="loginButton" text="Add Employee" />
-    <Button layoutX="39.0" layoutY="83.0" onAction="#handleSearch" prefHeight="27.0" prefWidth="98.0" styleClass="loginButton" text="Search" />
-    <Button layoutX="344.0" layoutY="83.0" mnemonicParsing="false" onAction="#updateEmployee" styleClass="loginButton" text="Update" />
-    <Button layoutX="459.0" layoutY="83.0" mnemonicParsing="false" onAction="#deleteEmployee" styleClass="loginButton" text="Delete" />
-    
+   <HBox layoutX="39.0" layoutY="83.0" spacing="30.0">
+      <children>
+          <Button onAction="#handleSearch" prefHeight="27.0" prefWidth="98.0" styleClass="loginButton" text="Search" />
+          
+          <!-- Buttons (placed outside the TableView) -->
+          <Button onAction="#handleAddEmployee" styleClass="loginButton" text="Add Employee" />
+          <Button mnemonicParsing="false" onAction="#updateEmployee" styleClass="loginButton" text="Update" />
+          <Button mnemonicParsing="false" onAction="#deleteEmployee" styleClass="loginButton" text="Delete" />
+          <Button mnemonicParsing="false" onAction="#viewSalaries" styleClass="loginButton" text="Salaries" />
+         <Button mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
+      </children>
+   </HBox>
     <!-- Four Search Fields -->
     <TextField fx:id="searchField" layoutX="20.0" layoutY="37.0" promptText="ID" />
     <TextField fx:id="searchField1" layoutX="209.0" layoutY="37.0" promptText="Full name" />
@@ -36,12 +42,9 @@
 
     <!-- Upper Pane (Title Bar) -->
     <Pane fx:id="titleBar" layoutX="39.0" layoutY="6.0" prefHeight="31.0" prefWidth="882.0">
-        <Button fx:id="minimizeButton" layoutX="769.0" layoutY="5.0" onAction="#minimizeWindow"
-                style="-fx-background-color: transparent; -fx-text-fill: white;" text="🗕"/>
-        <Button fx:id="closeButton" layoutX="817.0" layoutY="5.0" onAction="#closeWindow"
-                style="-fx-background-color: red; -fx-text-fill: white;" text="✖"/>
-        <Label layoutX="-14.0" layoutY="5.0" text="HR Management"/>
+        <Button fx:id="minimizeButton" layoutX="769.0" layoutY="5.0" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🗕" />
+        <Button fx:id="closeButton" layoutX="817.0" layoutY="5.0" onAction="#closeWindow" style="-fx-background-color: red; -fx-text-fill: white;" text="✖" />
+        <Label layoutX="-14.0" layoutY="5.0" text="HR Management" />
     </Pane>
-   <Button layoutX="575.0" layoutY="83.0" mnemonicParsing="false" onAction="#viewSalaries" styleClass="loginButton" text="Salaries" />
-   <Button layoutX="694.0" layoutY="83.0" mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
+
 </AnchorPane>
