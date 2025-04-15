@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="443.0" prefWidth="659.0" style="-fx-background-color: gold;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementemployee.EmployeeLoginController">
+   <children>
+
+      <!-- Title Bar with Close and Minimize Buttons -->
+      <Pane fx:id="titleBar" layoutY="8.0" prefHeight="56.0" prefWidth="659.0" style="-fx-background-color: gold;">
+         <children>
+            <Button fx:id="minimizeButton" layoutX="530.0" layoutY="4.0" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15pt;" text="-" textFill="#ebeae5" />
+      
+            <!-- App Icon (Optional) -->
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="-1.0" preserveRatio="true">
+               <image>
+                  <Image url="@Icon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeButton" layoutX="591.0" minWidth="53.0" onAction="#closeWindow" prefHeight="37.0" prefWidth="53.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 14pt;" text="✖" />
+         </children>
+      </Pane>
+
+      <!-- Login Box -->
+      <Pane layoutX="178.0" layoutY="100.0" prefHeight="271.0" prefWidth="310.0" style="-fx-background-color: black;">
+         <children>
+            <Text fill="#eeede7" layoutX="47.0" layoutY="79.0" style="-fx-font-weight: bold;" text="Employee ID" />
+            <TextField fx:id="employeeIdField" layoutX="47.0" layoutY="90.0" prefHeight="25.0" prefWidth="217.0" style="-fx-background-color: gray;" />
+
+            <Text fill="#eee9e9" layoutX="47.0" layoutY="141.0" style="-fx-font-weight: bold;" text="Password" />
+            <TextField fx:id="passwordField" layoutX="47.0" layoutY="151.0" prefHeight="25.0" prefWidth="217.0" style="-fx-background-color: gray;" />
+
+            <Text fill="#ebcd0b" layoutX="117.0" layoutY="41.0" style="-fx-font-weight: bold;" text="Login">
+               <font>
+                  <Font name="Century" size="25.0" />
+               </font>
+            </Text>
+
+            <Button fx:id="loginButton" layoutX="74.0" layoutY="214.0" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: gold;" text="Login">
+               <font>
+                  <Font name="Century" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+
+   </children>
+</Pane>

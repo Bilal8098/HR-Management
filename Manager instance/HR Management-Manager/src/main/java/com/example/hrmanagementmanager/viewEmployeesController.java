@@ -54,7 +54,7 @@ private void handleKeyPressed(KeyEvent event) {
         URL, USER, PASSWORD
         );
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Employees")) {
+             ResultSet rs = stmt.executeQuery("SELECT EmployeeID, FullName, Email, Phone, Address, Salary FROM Employees")) {
 
             while (rs.next()) {
                 Employee emp = new Employee(
