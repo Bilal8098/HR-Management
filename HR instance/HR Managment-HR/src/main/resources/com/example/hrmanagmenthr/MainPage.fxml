@@ -22,7 +22,7 @@
             <TableColumn fx:id="salaryCol" prefWidth="136.0" text="Salary" />
         </columns>
     </TableView>
-   <HBox layoutX="39.0" layoutY="83.0" spacing="30.0">
+   <HBox layoutX="39.0" layoutY="83.0" spacing="20.0">
       <children>
           <Button onAction="#handleSearch" prefHeight="27.0" prefWidth="98.0" styleClass="loginButton" text="Search" />
           
@@ -32,6 +32,7 @@
           <Button mnemonicParsing="false" onAction="#deleteEmployee" styleClass="loginButton" text="Delete" />
           <Button mnemonicParsing="false" onAction="#viewSalaries" styleClass="loginButton" text="Salaries" />
          <Button mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
+         <Button fx:id="viewAttendance" mnemonicParsing="false" onAction="#viewAttendance" styleClass="loginButton" text="Attendance" />
       </children>
    </HBox>
     <!-- Four Search Fields -->

@@ -20,12 +20,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 @SuppressWarnings("ALL")
 public class EmployeeController {
-     @FXML private Pane titleBar;
-    @FXML private Button closeButton;
-    @FXML private Button minimizeButton;
+    @FXML
+    private Pane titleBar;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button minimizeButton;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -43,13 +47,13 @@ public class EmployeeController {
 
     // Four separate search fields from FXML
     @FXML
-    private TextField searchField;      // For ID
+    private TextField searchField; // For ID
     @FXML
-    private TextField searchField1;     // For Full Name
+    private TextField searchField1; // For Full Name
     @FXML
-    private TextField searchField11;    // For Email
+    private TextField searchField11; // For Email
     @FXML
-    private TextField searchField111;   // For Phone
+    private TextField searchField111; // For Phone
 
     @FXML
     private TableView<Employee> employeeTable;
@@ -73,6 +77,8 @@ public class EmployeeController {
     private TableColumn<Employee, Double> salaryCol;
 
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
+    @FXML
+    private Button viewAttendance;
 
     public void initialize() {
         titleBar.setOnMousePressed(event -> {
@@ -100,8 +106,7 @@ public class EmployeeController {
         // If the scene is already set, add the stylesheet.
         if (employeeTable.getScene() != null) {
             employeeTable.getScene().getStylesheets().add(
-                getClass().getResource("styles.css").toExternalForm()
-            );
+                    getClass().getResource("styles.css").toExternalForm());
         }
     }
 
@@ -119,8 +124,7 @@ public class EmployeeController {
                         rs.getString("address"),
                         rs.getDouble("salary"),
                         rs.getString("password"),
-                        rs.getBytes("fingerprint")
-                ));
+                        rs.getBytes("fingerprint")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,11 +151,12 @@ public class EmployeeController {
 
         // Log parameters for debugging
         System.out.println("Searching with: ID: " + idKeyword + ", FullName: " + nameKeyword +
-                           ", Email: " + emailKeyword + ", Phone: " + phoneKeyword);
+                ", Email: " + emailKeyword + ", Phone: " + phoneKeyword);
 
         employees.clear();
         try (Connection conn = DatabaseConnection.getConnection()) {
-            // Query construction: if ID is not "%" (i.e., user entered a specific ID), use exact match
+            // Query construction: if ID is not "%" (i.e., user entered a specific ID), use
+            // exact match
             String query;
             if (idKeyword.equals("%")) {
                 query = "SELECT * FROM employees WHERE fullname LIKE ? AND email LIKE ? AND phone LIKE ?";
@@ -196,6 +201,7 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
+
     public void handleAddEmployee(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
@@ -227,14 +233,16 @@ public class EmployeeController {
             try (Connection conn = DatabaseConnection.getConnection()) {
                 conn.setAutoCommit(false);
                 try (PreparedStatement stmt1 = conn.prepareStatement("DELETE FROM salary WHERE employeeid = ?");
-                     PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM attendance WHERE employeeid = ?")) {
+                        PreparedStatement stmt2 = conn
+                                .prepareStatement("DELETE FROM attendance WHERE employeeid = ?")) {
 
                     stmt1.setInt(1, selectedEmp.getId());
                     stmt2.setInt(1, selectedEmp.getId());
                     stmt1.executeUpdate();
                     stmt2.executeUpdate();
 
-                    try (PreparedStatement stmt3 = conn.prepareStatement("DELETE FROM employees WHERE employeeid = ?")) {
+                    try (PreparedStatement stmt3 = conn
+                            .prepareStatement("DELETE FROM employees WHERE employeeid = ?")) {
                         stmt3.setInt(1, selectedEmp.getId());
                         stmt3.executeUpdate();
                     }
@@ -274,6 +282,7 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
+
     public void viewSalaries() {
         Employee selectedEmp = employeeTable.getSelectionModel().getSelectedItem();
 
@@ -309,12 +318,29 @@ public class EmployeeController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void viewAttendance() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Attendance.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Attendance table");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Failed to open attendance page.");
+        }
+    }
+
     public void openraiseValuePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("raiseValue.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.initStyle(StageStyle.UNDECORATED);
+
             stage.setTitle("Raise Salaries for All Employees");
             stage.show();
         } catch (Exception e) {
@@ -322,6 +348,7 @@ public class EmployeeController {
             showAlert("Failed to open Raise All page.");
         }
     }
+
     @FXML
     private TextField value;
 
@@ -352,7 +379,5 @@ public class EmployeeController {
             showAlert("Failed to apply raise.");
         }
     }
-
-
 
 }
