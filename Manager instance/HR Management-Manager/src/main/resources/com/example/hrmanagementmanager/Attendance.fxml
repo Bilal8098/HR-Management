@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="col" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.AttendanceController">
+
+    <children>
+        <HBox fx:id="titleBar" prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: #222;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 6px;" text="Attendance Records" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="minimizeButton" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🗕" />
+            <Button fx:id="closeButton" onAction="#closeWindow" style="-fx-background-color: red; -fx-text-fill: white;" text="✖" />
+        </HBox>
+
+        <TableView fx:id="attendanceTable" layoutX="20.0" layoutY="50.0" prefHeight="320.0" prefWidth="560.0" stylesheets="@style.css">
+            <columns>
+                <TableColumn fx:id="attendanceIdCol" prefWidth="118.0" text="Attendance ID" />
+                <TableColumn fx:id="employeeIdCol" prefWidth="122.0" text="Employee ID" />
+                <TableColumn fx:id="attendDateCol" prefWidth="260.0" text="Attendance Date" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
