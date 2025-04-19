@@ -1,24 +1,14 @@
 package com.example.hrmanagementemployee;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class EmployeePageController {
-    private int empID;
-
+    private final int empID;
     @FXML private Button viewAttendance;
     public EmployeePageController(int id) {
         this.empID = id;
@@ -41,4 +31,20 @@ private void openAttendanceWindow() {
         e.printStackTrace();
     }
 }
+@FXML
+private void openPDFWindow() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PDFview.fxml"));
+        loader.setControllerFactory(param -> new EmployeePDFsController(empID));
+
+        Stage stage = new Stage();
+        stage.setTitle("Employee PDFs");
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 }
