@@ -6,21 +6,29 @@ import java.sql.ResultSet;
 
 import com.example.hrmanagmenthr.PDFGeneration.SalaryReportGenerator;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -112,18 +120,72 @@ public class EmployeeController {
                     getClass().getResource("styles.css").toExternalForm());
         }
     }
+private Stage loadingStage;
 
-     @FXML
-    private void handleResetSalary(ActionEvent event) {
-        // If you’ve refactored SalaryReportGenerator to expose a run() method:
-        new Thread(() -> {
-            try {
-                SalaryReportGenerator.main(new String[0]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+private void showLoadingDialog() {
+    ProgressBar progressBar = new ProgressBar();
+    progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+    progressBar.setPrefWidth(250);
+
+    Label label = new Label("Processing salary reset...");
+    VBox vbox = new VBox(15, label, progressBar);
+    vbox.setAlignment(Pos.CENTER);
+    vbox.setPadding(new Insets(20));
+
+    Scene scene = new Scene(vbox);
+
+    loadingStage = new Stage();
+    loadingStage.initModality(Modality.APPLICATION_MODAL);
+    loadingStage.setResizable(false);
+    loadingStage.setTitle("Please Wait");
+    loadingStage.setScene(scene);
+    loadingStage.show();
+}
+
+private void hideLoadingDialog() {
+    if (loadingStage != null) {
+        loadingStage.close();
     }
+}
+@FXML
+private void handleResetSalary(ActionEvent event) {
+    showLoadingDialog();
+
+    Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            SalaryReportGenerator.main(new String[0]);
+            return null;
+        }
+        @Override
+        protected void succeeded() {
+            super.succeeded();
+            hideLoadingDialog();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Done");
+                alert.setHeaderText(null);
+                alert.setContentText("Salary reset completed successfully.");
+                alert.showAndWait();
+            });
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            hideLoadingDialog();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to reset salary.");
+                alert.showAndWait();
+            });
+        }
+    };
+
+    new Thread(task).start();
+}
     private void loadAllEmployees() {
         employees.clear();
         try (Connection conn = DatabaseConnection.getConnection()) {

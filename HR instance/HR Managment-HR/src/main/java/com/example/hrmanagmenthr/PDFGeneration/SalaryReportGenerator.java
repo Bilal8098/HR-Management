@@ -3,6 +3,7 @@ package com.example.hrmanagmenthr.PDFGeneration;
 import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -100,12 +101,26 @@ public class SalaryReportGenerator {
         Font totalFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, gold);
 
         // Header
-        PdfPTable header = new PdfPTable(new float[]{1, 6, 3});
-        header.setWidthPercentage(100);
-        header.addCell(emptyCell(50));
-        header.addCell(noBorderCell(currentDate, cellFont));
-        document.add(header);
-        document.add(Chunk.NEWLINE);
+ // Header Title Row
+PdfPTable header = new PdfPTable(new float[]{6, 2});
+header.setWidthPercentage(100);
+
+// Left side: Payroll report title
+String monthName = new SimpleDateFormat("MMMM yyyy").format(new java.util.Date());
+PdfPCell titleCell = new PdfPCell(new Phrase("Payroll Report for " + monthName, headFont));
+titleCell.setBorder(Rectangle.NO_BORDER);
+titleCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+header.addCell(titleCell);
+
+// Right side: Current Date
+PdfPCell dateCell = new PdfPCell(new Phrase(currentDate, cellFont));
+dateCell.setBorder(Rectangle.NO_BORDER);
+dateCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+header.addCell(dateCell);
+
+document.add(header);
+document.add(Chunk.NEWLINE);
+
 
         // Table
         PdfPTable table = new PdfPTable(new float[]{1, 4, 2});
