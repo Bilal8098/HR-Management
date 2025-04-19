@@ -2,8 +2,8 @@ package com.example.hrmanagementemployee;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -65,13 +65,11 @@ public class EmployeeLoginController {
 
         if (LoginController.validateLogin(empId, pass)) {
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            LoginController.openEmployeePage(stage);
+            LoginController.openEmployeePage(stage, Integer.parseInt(empId));
         } else {
             showAlert("Invalid Employee ID or Password.");
         }
     }
-
-
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
@@ -79,6 +77,4 @@ public class EmployeeLoginController {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-
-
 }

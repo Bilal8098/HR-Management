@@ -1,15 +1,16 @@
 package com.example.hrmanagementemployee;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javafx.stage.StageStyle;
 
 public class LoginController extends Application {
 
@@ -18,6 +19,7 @@ public class LoginController extends Application {
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeeLogin.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Employee Login");
+          stage.initStyle(StageStyle.UNDECORATED); 
         stage.setScene(scene);
         stage.show();
     }
@@ -40,9 +42,13 @@ public class LoginController extends Application {
         }
     }
 
-    public static void openEmployeePage(Stage stage) {
+    public static void openEmployeePage(Stage stage, int empId) {
         try {
             FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeePage.fxml"));
+    
+            // Set a controller factory to inject the empId
+            loader.setControllerFactory(param -> new EmployeePageController(empId));
+    
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.setTitle("Employee Page");
@@ -50,4 +56,5 @@ public class LoginController extends Application {
             e.printStackTrace();
         }
     }
+    
 }
