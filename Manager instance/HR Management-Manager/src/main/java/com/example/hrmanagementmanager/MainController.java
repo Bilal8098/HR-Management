@@ -49,4 +49,18 @@ public class MainController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+private void openReportsPage() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportsView.fxml"));
+
+        Stage stage = new Stage();
+        stage.setTitle("Employee PDFs");
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }

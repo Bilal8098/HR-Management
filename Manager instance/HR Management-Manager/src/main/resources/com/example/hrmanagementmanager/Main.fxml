@@ -7,5 +7,6 @@
    <children>
       <Button fx:id="viewEmps" layoutX="39.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewEmps" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View employees" />
       <Button fx:id="viewAttendances" layoutX="244.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View attendances" />
+      <Button layoutX="39.0" layoutY="167.0" mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View reports" />
    </children>
 </AnchorPane>
