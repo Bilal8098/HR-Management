@@ -9,71 +9,106 @@ import javafx.stage.StageStyle;
 
 public class EmployeePageController {
     private final int empID;
-    @FXML private Button viewAttendance;
+    @FXML
+    private Button viewAttendance;
+
     public EmployeePageController(int id) {
         this.empID = id;
     }
+
     @FXML
-private void openAttendanceWindow() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Attendance.fxml"));
+    private void openAttendanceWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Attendance.fxml"));
 
-        // Inject employee ID
-        loader.setControllerFactory(param -> new AttendanceController(empID));
+            // Inject employee ID
+            loader.setControllerFactory(param -> new AttendanceController(empID));
 
-        Stage stage = new Stage();
-          stage.initStyle(StageStyle.UNDECORATED); 
-        stage.setScene(new Scene(loader.load()));
-        stage.setTitle("Attendance Records");
-        stage.show();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Attendance Records");
+            stage.show();
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
-@FXML
-private void openPDFWindow() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PDFview.fxml"));
-        loader.setControllerFactory(param -> new EmployeePDFsController(empID));
 
-        Stage stage = new Stage();
-        stage.setTitle("Employee PDFs");
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
+    @FXML
+    private void openPDFWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PDFview.fxml"));
+            loader.setControllerFactory(param -> new EmployeePDFsController(empID));
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            Stage stage = new Stage();
+            stage.setTitle("Employee PDFs");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
-@FXML
-private void openVacationRequestWindow() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RequestVacation.fxml"));
-        loader.setControllerFactory(param -> new RequestVacationController(empID));
 
-        Stage stage = new Stage();
-        stage.setTitle("Request Vacation");
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
+    @FXML
+    private void openVacationRequestWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RequestVacation.fxml"));
+            loader.setControllerFactory(param -> new RequestVacationController(empID));
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            Stage stage = new Stage();
+            stage.setTitle("Request Vacation");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
-@FXML
-private void viewVacationWindow() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VacationView.fxml"));
-        loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
 
-        Stage stage = new Stage();
-        stage.setTitle("View vacations request");
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
+    @FXML
+    private void viewVacationWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VacationView.fxml"));
+            loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            Stage stage = new Stage();
+            stage.setTitle("View vacations request");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
+
+    @FXML
+    private void openComplaintWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Complaints.fxml"));
+            loader.setControllerFactory(p -> new ComplaintController(empID));
+
+            Stage stage = new Stage();
+            stage.setTitle("Post a Complaint");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void openSuggestionWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Suggestion.fxml"));
+            loader.setControllerFactory(p -> new SuggestionsController(empID));
+
+            Stage stage = new Stage();
+            stage.setTitle("Post a Suggestion");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
