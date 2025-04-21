@@ -46,5 +46,34 @@ private void openPDFWindow() {
         e.printStackTrace();
     }
 }
+@FXML
+private void openVacationRequestWindow() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RequestVacation.fxml"));
+        loader.setControllerFactory(param -> new RequestVacationController(empID));
 
+        Stage stage = new Stage();
+        stage.setTitle("Request Vacation");
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+@FXML
+private void viewVacationWindow() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VacationView.fxml"));
+        loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
+
+        Stage stage = new Stage();
+        stage.setTitle("View vacations request");
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }

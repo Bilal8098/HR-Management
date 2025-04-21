@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hrmanagementemployee.ViewVacationRequestsController"
+            prefWidth="600" prefHeight="400" stylesheets="@style.css">
+    <children>
+        <Label text="My Vacation Requests"
+               style="-fx-font-size: 18px; -fx-text-fill: white;"
+               layoutX="20" layoutY="20"/>
+
+        <ScrollPane fx:id="scrollPane"
+                    layoutX="20" layoutY="60"
+                    prefWidth="560" prefHeight="320"
+                    fitToWidth="true">
+            <content>
+                <!-- Container where we’ll inject the cards -->
+                <VBox fx:id="requestsContainer"
+                      spacing="10"
+                      style="-fx-padding: 10;" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
