@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="677.0" prefWidth="924.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.EmployeeController">
+<AnchorPane prefHeight="731.0" prefWidth="1049.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.EmployeeController">
 
     <!-- TableView -->
-    <TableView fx:id="employeeTable" layoutX="39.0" layoutY="140.0" prefHeight="570.0" prefWidth="786.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="140.0">
+    <TableView fx:id="employeeTable" layoutX="39.0" layoutY="140.0" prefHeight="553.0" prefWidth="848.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="162.0" AnchorPane.topAnchor="140.0">
         <columns>
             <TableColumn fx:id="idCol" text="ID" />
             <TableColumn fx:id="nameCol" prefWidth="142.0" text="Full Name" />
@@ -31,8 +31,6 @@
           <Button mnemonicParsing="false" onAction="#updateEmployee" styleClass="loginButton" text="Update" />
           <Button mnemonicParsing="false" onAction="#deleteEmployee" styleClass="loginButton" text="Delete" />
           <Button mnemonicParsing="false" onAction="#viewSalaries" styleClass="loginButton" text="Salaries" />
-         <Button mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
-         <Button fx:id="viewAttendance" mnemonicParsing="false" onAction="#viewAttendance" styleClass="loginButton" text="Attendance" />
       </children>
    </HBox>
     <!-- Four Search Fields -->
@@ -42,11 +40,14 @@
     <TextField fx:id="searchField111" layoutX="592.0" layoutY="37.0" promptText="Phone" />
 
     <!-- Upper Pane (Title Bar) -->
-    <Pane fx:id="titleBar" layoutX="39.0" layoutY="6.0" prefHeight="31.0" prefWidth="882.0">
-        <Button fx:id="minimizeButton" layoutX="769.0" layoutY="5.0" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🗕" />
-        <Button fx:id="closeButton" layoutX="817.0" layoutY="2.0" onAction="#closeWindow" style="-fx-background-color: red; -fx-text-fill: white;" text="✖" />
+    <Pane fx:id="titleBar" layoutX="39.0" layoutY="6.0" prefHeight="31.0" prefWidth="1017.0">
+        <Button fx:id="minimizeButton" layoutX="934.0" layoutY="5.0" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🗕" />
+        <Button fx:id="closeButton" layoutX="975.0" layoutY="2.0" onAction="#closeWindow" style="-fx-background-color: red; -fx-text-fill: white;" text="✖" />
         <Label layoutX="-14.0" layoutY="5.0" text="HR Management" />
     </Pane>
-   <Button fx:id="resetSalary" layoutX="775.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleResetSalary" styleClass="loginButton" text="Reset salary" />
+   <Button layoutX="904.0" layoutY="275.0" mnemonicParsing="false" onAction="#openHRVacationRequests" styleClass="loginButton" text="Vacations" />
+   <Button fx:id="resetSalary1" layoutX="903.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleResetSalary" styleClass="loginButton" text="Reset salary" />
+   <Button fx:id="viewAttendance" layoutX="905.0" layoutY="208.0" mnemonicParsing="false" onAction="#viewAttendance" styleClass="loginButton" text="Attendance" />
+   <Button layoutX="903.0" layoutY="340.0" mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
 
 </AnchorPane>

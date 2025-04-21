@@ -455,5 +455,16 @@ private void handleResetSalary(ActionEvent event) {
             showAlert("Failed to apply raise.");
         }
     }
-
+    @FXML
+    private void openHRVacationRequests() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ApproveVacations.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Manage Vacation Requests");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

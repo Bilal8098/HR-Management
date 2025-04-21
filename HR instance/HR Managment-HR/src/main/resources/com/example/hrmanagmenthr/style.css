@@ -80,3 +80,44 @@
 .top-bar {
     -fx-padding: 10 10 10 10;
 }
+
+
+.approveButton {
+    -fx-background-color: linear-gradient(to bottom, #28a745, #218838); /* Green gradient */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: #1e1e1e;
+}
+
+.approveButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #34d058, #218838);
+    -fx-cursor: hand;
+}
+
+.approveButton:pressed {
+    -fx-background-color: #1e7e34;
+}
+
+.rejectButton {
+    -fx-background-color: linear-gradient(to bottom, #dc3545, #c82333); /* Red gradient */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: #1e1e1e;
+}
+
+.rejectButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #e4606d, #c82333);
+    -fx-cursor: hand;
+}
+
+.rejectButton:pressed {
+    -fx-background-color: #bd2130;
+}
