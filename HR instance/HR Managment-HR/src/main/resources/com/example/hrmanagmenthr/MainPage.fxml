@@ -13,14 +13,14 @@
 <AnchorPane prefHeight="731.0" prefWidth="1049.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.EmployeeController">
 
     <!-- TableView -->
-    <TableView fx:id="employeeTable" layoutX="39.0" layoutY="140.0" prefHeight="553.0" prefWidth="907.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="140.0">
+    <TableView fx:id="employeeTable" layoutX="39.0" layoutY="140.0" prefHeight="553.0" prefWidth="998.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="140.0">
         <columns>
             <TableColumn fx:id="idCol" text="ID" />
             <TableColumn fx:id="nameCol" prefWidth="142.0" text="Full Name" />
             <TableColumn fx:id="emailCol" prefWidth="164.0" text="Email" />
             <TableColumn fx:id="phoneCol" prefWidth="142.0" text="Phone" />
-            <TableColumn fx:id="addressCol" prefWidth="182.0" text="Address" />
-            <TableColumn fx:id="salaryCol" prefWidth="136.0" text="Salary" />
+            <TableColumn fx:id="addressCol" prefWidth="254.0" text="Address" />
+            <TableColumn fx:id="salaryCol" prefWidth="215.0" text="Salary" />
         </columns>
     </TableView>
    <HBox layoutX="39.0" layoutY="83.0" spacing="20.0">
@@ -32,6 +32,8 @@
           <Button mnemonicParsing="false" onAction="#updateEmployee" styleClass="loginButton" text="Update" />
           <Button mnemonicParsing="false" onAction="#deleteEmployee" styleClass="loginButton" text="Delete" />
           <Button mnemonicParsing="false" onAction="#viewSalaries" styleClass="loginButton" text="Salaries" />
+         <Button fx:id="resetSalary1" mnemonicParsing="false" onAction="#handleResetSalary" styleClass="loginButton" text="Reset salary" />
+         <Button mnemonicParsing="false" onAction="#openSendMessagePage" styleClass="loginButton" text="Send a message for all" />
       </children>
    </HBox>
     <!-- Four Search Fields -->
@@ -50,10 +52,7 @@
          </font></Label>
     </Pane>
    <Button layoutX="1059.0" layoutY="281.0" mnemonicParsing="false" onAction="#openHRVacationRequests" styleClass="loginButton" text="Vacations" />
-   <Button fx:id="resetSalary1" layoutX="1051.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleResetSalary" styleClass="loginButton" text="Reset salary" />
    <Button fx:id="viewAttendance" layoutX="1053.0" layoutY="211.0" mnemonicParsing="false" onAction="#viewAttendance" styleClass="loginButton" text="Attendance" />
    <Button layoutX="1050.0" layoutY="346.0" mnemonicParsing="false" onAction="#openraiseValuePage" styleClass="loginButton" text="Raise For All" />
-   <Button layoutX="1017.0" layoutY="417.0" mnemonicParsing="false" onAction="#openSendMessagePage"
-           styleClass="loginButton" text="Send a message for all" />
 
 </AnchorPane>

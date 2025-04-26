@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -379,6 +380,7 @@ private void handleResetSalary(ActionEvent event) {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Salaries - " + selectedEmp.getFullName());
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -403,6 +405,8 @@ private void handleResetSalary(ActionEvent event) {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Attendance table");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -416,7 +420,7 @@ private void handleResetSalary(ActionEvent event) {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.initStyle(StageStyle.UNDECORATED);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
 
             stage.setTitle("Raise Salaries for All Employees");
             stage.show();
@@ -463,6 +467,8 @@ private void handleResetSalary(ActionEvent event) {
             Stage stage = new Stage();
             stage.setTitle("Manage Vacation Requests");
             stage.setScene(new Scene(loader.load()));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -477,6 +483,8 @@ private void handleResetSalary(ActionEvent event) {
             Stage stage = new Stage();
             stage.setTitle("Send Message to All Employees");
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

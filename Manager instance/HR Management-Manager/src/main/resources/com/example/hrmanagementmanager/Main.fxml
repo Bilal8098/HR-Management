@@ -2,11 +2,27 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="653.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="416.0" style="-fx-border-color: gold; -fx-border-width: 3;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.MainController">
    <children>
-      <Button fx:id="viewEmps" layoutX="39.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewEmps" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View employees" />
-      <Button fx:id="viewAttendances" layoutX="244.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View attendances" />
-      <Button layoutX="39.0" layoutY="167.0" mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View reports" />
+      <GridPane hgap="10.0" layoutX="30.0" layoutY="14.0" prefHeight="264.0" prefWidth="371.0" vgap="20.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="viewAttendances" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View attendances" />
+            <Button mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View reports" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="179.0" styleClass="loginButton" text="Announce message" GridPane.rowIndex="1" />
+            <Button fx:id="viewEmps" mnemonicParsing="false" onAction="#viewEmps" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View employees" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
