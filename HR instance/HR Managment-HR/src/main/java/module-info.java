@@ -6,6 +6,7 @@ module com.example.hrmanagementhr {
     requires javafx.graphics;
     requires org.postgresql.jdbc;
     requires itextpdf;
+    requires java.desktop;
 
     opens com.example.hrmanagmenthr to javafx.fxml;  // Ensure reflection access to your package
     exports com.example.hrmanagmenthr;  // Expose your package to other modules

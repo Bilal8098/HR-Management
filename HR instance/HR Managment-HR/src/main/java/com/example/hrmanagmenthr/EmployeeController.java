@@ -1,5 +1,6 @@
 package com.example.hrmanagmenthr;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -467,4 +468,19 @@ private void handleResetSalary(ActionEvent event) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openSendMessagePage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagmenthr/SendMessage.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Send Message to All Employees");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

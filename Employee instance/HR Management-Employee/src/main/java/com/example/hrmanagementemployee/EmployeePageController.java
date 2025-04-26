@@ -1,11 +1,15 @@
 package com.example.hrmanagementemployee;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class EmployeePageController {
     private final int empID;
@@ -111,4 +115,26 @@ public class EmployeePageController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private Button viewMessages;
+
+    @FXML
+    private void viewMessagesAction() {
+        try {
+            // Corrected the path to ViewMessage.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementemployee/ViewMessage.fxml"));
+            Pane viewMessagePage = loader.load();
+
+            // Create a new stage (window) for the view message page
+            Stage stage = new Stage();
+            stage.setTitle("View Messages");
+            stage.setScene(new Scene(viewMessagePage));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

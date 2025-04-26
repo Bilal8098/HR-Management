@@ -11,5 +11,7 @@
       <Button layoutX="228.0" layoutY="150.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="162.0" styleClass="loginButton" text="View vacations" onAction="#viewVacationWindow"/>
       <Button layoutX="45.0" layoutY="266.0" mnemonicParsing="false" onAction="#openComplaintWindow" prefHeight="77.0" prefWidth="162.0" styleClass="loginButton" text="Post Complaint" />
       <Button layoutX="228.0" layoutY="266.0" mnemonicParsing="false" onAction="#openSuggestionWindow" prefHeight="77.0" prefWidth="162.0" styleClass="loginButton" text="Post Suggestion" />
+      <Button fx:id="viewMessages" layoutX="45.0" layoutY="266.0" mnemonicParsing="false" onAction="#viewMessagesAction" prefHeight="77.0" prefWidth="162.0" styleClass="loginButton" text="View Messages" />
+
    </children>
 </Pane>

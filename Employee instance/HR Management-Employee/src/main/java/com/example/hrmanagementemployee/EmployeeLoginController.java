@@ -8,40 +8,27 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class EmployeeLoginController {
+
     @FXML
     private Pane titleBar;
     @FXML
     private Button closeButton;
     @FXML
     private Button minimizeButton;
+    @FXML
+    private TextField employeeIdField;
+    @FXML
+    private TextField passwordField;
+    @FXML
+    private Button loginButton;
+
     private double xOffset = 0;
     private double yOffset = 0;
 
     @FXML
-    private void closeWindow() {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void minimizeWindow() {
-        Stage stage = (Stage) minimizeButton.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-
-    @FXML
-    private TextField employeeIdField;
-
-    @FXML
-    private TextField passwordField;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
     private void initialize() {
         loginButton.setOnAction(e -> handleLogin());
+
         titleBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
@@ -63,18 +50,33 @@ public class EmployeeLoginController {
             return;
         }
 
-        if (LoginController.validateLogin(empId, pass)) {
+        int loginResult = LoginController.validateLogin(empId, pass);
+
+        if (loginResult > 0) {
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            LoginController.openEmployeePage(stage, Integer.parseInt(empId));
+            LoginController.openEmployeePage(stage, loginResult);
         } else {
             showAlert("Invalid Employee ID or Password.");
         }
     }
+
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void closeWindow() {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) minimizeButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

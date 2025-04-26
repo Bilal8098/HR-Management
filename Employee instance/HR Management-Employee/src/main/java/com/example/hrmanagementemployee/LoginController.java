@@ -19,7 +19,7 @@ public class LoginController extends Application {
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeeLogin.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Employee Login");
-          stage.initStyle(StageStyle.UNDECORATED); 
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
@@ -28,33 +28,47 @@ public class LoginController extends Application {
         launch();
     }
 
-    public static boolean validateLogin(String employeeId, String password) {
-        String sql = "SELECT * FROM employees WHERE employeeid = ? AND password = ?";
+    /**
+     * Validates login credentials.
+     * Returns the employee ID if valid, otherwise returns 0 or -1 for failure.
+     */
+    public static int validateLogin(String employeeIdStr, String password) {
+        String sql = "SELECT employeeid FROM employees WHERE employeeid = ? AND password = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(employeeId));
+
+            int employeeId = Integer.parseInt(employeeIdStr);
+            stmt.setInt(1, employeeId);
             stmt.setString(2, password);
+
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                return rs.getInt("employeeid");  // Success: return valid employee ID
+            } else {
+                return 0; // No match
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return -1; // Error
         }
     }
 
+    /**
+     * Opens the Employee Page and passes the employee ID to the controller.
+     */
     public static void openEmployeePage(Stage stage, int empId) {
         try {
             FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeePage.fxml"));
-    
-            // Set a controller factory to inject the empId
             loader.setControllerFactory(param -> new EmployeePageController(empId));
-    
+
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.setTitle("Employee Page");
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 }

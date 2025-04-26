@@ -1,44 +1,55 @@
 package com.example.hrmanagmenthr;
 
-public class Employee {
-    private int id;
-    private String fullName;
-    private String email;
-    private String phone;
-    private String address;
-    private double salary;
-    private String password;
-    private byte[] fingerprint;
+import javafx.beans.property.*;
 
+public class Employee {
+    private final IntegerProperty id;
+    private final StringProperty fullName;
+    private final StringProperty email;
+    private final StringProperty phone;
+    private final StringProperty address;
+    private final DoubleProperty salary;
+    private final StringProperty password;
+    private final ObjectProperty<byte[]> fingerprint;
+
+    // Constructor to initialize properties
     public Employee(int id, String fullName, String email, String phone, String address, double salary, String password, byte[] fingerprint) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.salary = salary;
-        this.password = password;
-        this.fingerprint = fingerprint;
+        this.id = new SimpleIntegerProperty(id);
+        this.fullName = new SimpleStringProperty(fullName);
+        this.email = new SimpleStringProperty(email);
+        this.phone = new SimpleStringProperty(phone);
+        this.address = new SimpleStringProperty(address);
+        this.salary = new SimpleDoubleProperty(salary);
+        this.password = new SimpleStringProperty(password);
+        this.fingerprint = new SimpleObjectProperty<>(fingerprint);
     }
 
-    public int getId() { return id; }
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    // Getter methods
+    public int getId() { return id.get(); }
+    public String getFullName() { return fullName.get(); }
+    public String getEmail() { return email.get(); }
+    public String getPhone() { return phone.get(); }
+    public String getAddress() { return address.get(); }
+    public double getSalary() { return salary.get(); }
+    public String getPassword() { return password.get(); }
+    public byte[] getFingerprint() { return fingerprint.get(); }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    // Setter methods
+    public void setFullName(String fullName) { this.fullName.set(fullName); }
+    public void setEmail(String email) { this.email.set(email); }
+    public void setPhone(String phone) { this.phone.set(phone); }
+    public void setAddress(String address) { this.address.set(address); }
+    public void setSalary(double salary) { this.salary.set(salary); }
+    public void setPassword(String password) { this.password.set(password); }
+    public void setFingerprint(byte[] fingerprint) { this.fingerprint.set(fingerprint); }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-
-    public double getSalary() { return salary; }
-    public void setSalary(double salary) { this.salary = salary; }
-
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-
-    public byte[] getFingerprint() { return fingerprint; }
+    // Property methods for binding
+    public IntegerProperty idProperty() { return id; }
+    public StringProperty fullNameProperty() { return fullName; }
+    public StringProperty emailProperty() { return email; }
+    public StringProperty phoneProperty() { return phone; }
+    public StringProperty addressProperty() { return address; }
+    public DoubleProperty salaryProperty() { return salary; }
+    public StringProperty passwordProperty() { return password; }
+    public ObjectProperty<byte[]> fingerprintProperty() { return fingerprint; }
 }
