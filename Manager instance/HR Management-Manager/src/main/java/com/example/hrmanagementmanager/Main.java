@@ -1,6 +1,7 @@
 package com.example.hrmanagementmanager;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Manager instance");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Icon.png"))));
         stage.show();
     }
     public static void main(String[] args) {

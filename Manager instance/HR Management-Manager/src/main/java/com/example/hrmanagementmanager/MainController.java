@@ -2,6 +2,7 @@ package com.example.hrmanagementmanager;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 public class MainController {
+
     @FXML
     private Button viewEmps;
+
     @FXML
     private Button viewAttendances;
-    public void viewEmps(){
+
+    public void viewEmps() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("viewEmployees.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -25,44 +30,94 @@ public class MainController {
             stage.setScene(scene);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
             stage.show();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Failed to open Employees page.");
         }
     }
+
     public void viewAttendance() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Attendance.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            stage.setTitle("Attendance Table");
             stage.setScene(new Scene(root));
-            stage.setTitle("Attendance table");
-            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Failed to open attendance page.");
+            showAlert("Failed to open Attendance page.");
         }
     }
-      private void showAlert(String message) {
+
+    @FXML
+    private void openReportsPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportsView.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Employee PDFs");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Failed to open Reports page.");
+        }
+    }
+
+    @FXML
+    private void viewComplaints(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("complaint-view.fxml"));
+            Parent complaintRoot = loader.load();
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(complaintRoot));
+            stage.setTitle("Complaints");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Failed to open Complaints page.");
+        }
+    }
+    
+
+    @FXML
+    private void viewSuggestions() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementmanager/ViewSuggestion.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Suggestions");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Failed to open Suggestions page.");
+        }
+    }
+
+    @FXML
+    private void goToAnnounceMessage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementmanager/AnnounceMessage.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Announce Messages");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Failed to open Announce Messages page.");
+        }
+    }
+
+
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-private void openReportsPage() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportsView.fxml"));
-
-        Stage stage = new Stage();
-        stage.setTitle("Employee PDFs");
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
 }

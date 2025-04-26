@@ -2,27 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="416.0" style="-fx-border-color: gold; -fx-border-width: 3;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="712.0" style="-fx-border-color: gold;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.MainController">
    <children>
-      <GridPane hgap="10.0" layoutX="30.0" layoutY="14.0" prefHeight="264.0" prefWidth="371.0" vgap="20.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button fx:id="viewAttendances" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View attendances" />
-            <Button mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View reports" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#openReportsPage" prefHeight="87.0" prefWidth="179.0" styleClass="loginButton" text="Announce message" GridPane.rowIndex="1" />
-            <Button fx:id="viewEmps" mnemonicParsing="false" onAction="#viewEmps" prefHeight="87.0" prefWidth="165.0" styleClass="loginButton" text="View employees" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
+      <Button fx:id="viewEmps" layoutX="256.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewEmps" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View employees" />
+      <Button fx:id="viewAttendances" layoutX="36.0" layoutY="101.0" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View attendances">
+         <font>
+            <Font size="29.0" />
+         </font></Button>
+      <Button layoutX="256.0" layoutY="101.0" mnemonicParsing="false" onAction="#openReportsPage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View reports" />
+      <Button fx:id="viewComplaints" layoutX="36.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewComplaints" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Complaints" />
+      <Text fill="#e4a40e" fontSmoothingType="LCD" layoutX="30.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-effect: shadow;" text="Manager Management">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="viewEmps11" layoutX="483.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewSuggestions" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Suggestions" />
+      <Button fx:id="viewEmps111" layoutX="483.0" layoutY="101.0" mnemonicParsing="false" onAction="#goToAnnounceMessage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="Announce Message" />
    </children>
 </AnchorPane>
