@@ -48,7 +48,7 @@ public class SuggestionsController implements Initializable {
         String user = "postgres";
         String password = "NqlVODXIobgaOsHmwWHqXllPtOVOZril";
 
-        String sql = "INSERT INTO Suggestions (employeeid, Suggestion) VALUES (?, ?)";
+        String sql = "INSERT INTO Suggestions (employeeid, suggestion) VALUES (?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {

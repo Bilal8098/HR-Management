@@ -21,7 +21,7 @@ public class ViewSugesstionController {
         String user = "postgres";
         String password = "NqlVODXIobgaOsHmwWHqXllPtOVOZril";
 
-        String query = "SELECT * FROM suggestion";
+        String query = "SELECT * FROM suggestions";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement();
