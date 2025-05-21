@@ -78,7 +78,7 @@ public class EmployeePageController {
 
             Stage stage = new Stage();
             stage.setTitle("Salaries report");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
 
@@ -94,7 +94,7 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new RequestVacationController(empID));
 
             Stage stage = new Stage();
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setTitle("Request Vacation");
             stage.setScene(new Scene(loader.load()));
             stage.show();
@@ -111,7 +111,7 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
 
             Stage stage = new Stage();
-             stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+             stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setTitle("View vacations request");
             stage.setScene(new Scene(loader.load()));
             stage.show();
@@ -129,7 +129,7 @@ public class EmployeePageController {
 
             Stage stage = new Stage();
             stage.setTitle("Post a Complaint");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class EmployeePageController {
 
             Stage stage = new Stage();
             stage.setTitle("Post a Suggestion");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
         } catch (Exception e) {
@@ -165,7 +165,7 @@ public class EmployeePageController {
             // Create a new stage (window) for the view message page
             Stage stage = new Stage();
             stage.setTitle("View Messages");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setScene(new Scene(viewMessagePage));
             stage.show();
 

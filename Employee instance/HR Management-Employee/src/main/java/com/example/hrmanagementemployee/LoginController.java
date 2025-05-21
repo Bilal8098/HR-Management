@@ -20,7 +20,7 @@ public class LoginController extends Application {
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeeLogin.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Employee Login");
-stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("icon.png")));
+stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("Icon.png")));
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
@@ -66,7 +66,7 @@ stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("icon.p
             loader.setControllerFactory(param -> new EmployeePageController(empId));
 
             Parent root = loader.load();
-            stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("icon.png")));
+            stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("Icon.png")));
 
             stage.setScene(new Scene(root));
             stage.setTitle("Employee Page");
