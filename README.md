@@ -39,8 +39,8 @@ Each instance contains a precompiled JAR file located in its respective folder i
 
 **Example:**  
 
-cd Releases/Attendance
-run.bat
+cd Releases/Attendance instance
+Attendance.bat
 The batch files are pre-configured to include the necessary JavaFX libraries from the SDK to run the application smoothly.
 
 Development
