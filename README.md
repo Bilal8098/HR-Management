@@ -75,7 +75,7 @@ For technical support or contributions:
 **Project Leadership:**
 - **Bilal Ahmed** (Project Lead)  
   Email: [reddivel8098@gmail.com](mailto:reddivel8098@gmail.com)  
-  Phone: [+201141511177] 
+  Phone: [+20 114 151 1177](tel:+201141511177)
 
 **Development Team:**
 - **Co-leader: Roaya Youssef**
