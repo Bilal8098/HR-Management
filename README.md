@@ -18,22 +18,6 @@ Each module is developed as a separate project within this repository to provide
 
 ---
 
-## Repository Structure
-
-/
-├── Attendance/ # Attendance instance source code
-├── HR/ # HR instance source code
-├── Manager/ # Manager instance source code
-├── Employee/ # Employee instance source code
-└── Releases/ # Compiled release JAR files and JavaFX SDK
-├── Attendance/ # Release folder for Attendance instance
-├── HR/ # Release folder for HR instance
-├── Manager/ # Release folder for Manager instance
-├── Employee/ # Release folder for Employee instance
-└── javafx-sdk/ # JavaFX SDK folder (required for running releases)
-
----
-
 ## Prerequisites
 
 - **JavaFX SDK 17.0.15** required to run the released JAR files.  
@@ -46,7 +30,7 @@ After downloading, unzip the SDK and place the entire folder inside the `Release
 ---
 
 ## Running the Application Releases
-
+```
 Each instance contains a precompiled JAR file located in its respective folder inside `Releases`. To run an instance:
 
 1. Make sure the JavaFX SDK folder (`javafx-sdk`) is inside the `Releases` folder.
@@ -90,13 +74,7 @@ Your Name
 Email: your.email@example.com
 
 Thank you for using the HR Management System!
-
+```
 ---
-
-### How to add your image
-
-1. Place your screenshot (e.g., `app_screenshot.png`) inside the `Releases` folder or a dedicated folder like `docs/images/`.
-2. Update the image path in the markdown:
-
 md
 ![HR Management Application](./Releases/Icon.png)
