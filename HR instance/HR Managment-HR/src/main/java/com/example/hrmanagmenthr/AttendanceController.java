@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -14,9 +15,22 @@ public class AttendanceController {
     @FXML private TableColumn<AttendanceModel, String> attendanceIdCol;
     @FXML private TableColumn<AttendanceModel, String> employeeIdCol;
     @FXML private TableColumn<AttendanceModel, String> attendDateCol;
+    @FXML private Pane titleBar;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
-    public void initialize() {
-        attendanceIdCol.setCellValueFactory(cellData ->
+     public void initialize() {
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+            attendanceIdCol.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getAttendanceId())));
         employeeIdCol.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getEmployeeId())));

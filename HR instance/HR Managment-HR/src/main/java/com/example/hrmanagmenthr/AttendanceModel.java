@@ -1,6 +1,7 @@
 package com.example.hrmanagmenthr;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class AttendanceModel {
     private int attendanceId;
@@ -23,10 +24,16 @@ public class AttendanceModel {
         this.employeeId = employeeId;
     }
 
-    public Timestamp getAttendDate() {
-        return attendDate;
+    // Modified getter returns formatted String without seconds
+    public String getAttendDate() {
+        if (attendDate == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(attendDate);
     }
 
+    // Setter remains accepting Timestamp
     public void setAttendDate(Timestamp attendDate) {
         this.attendDate = attendDate;
     }

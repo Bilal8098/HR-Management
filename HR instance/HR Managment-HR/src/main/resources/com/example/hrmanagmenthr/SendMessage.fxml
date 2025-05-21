@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.SendMessageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagmenthr.sendMessageController">
    <children>
-      <Text fill="#f5b507" layoutX="187.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Send Message To Everyone" />
-      <Text fill="#ebbf09" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="HR Management" />
+      <Text fill="#f5b507" layoutX="187.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 25;" text="Announce message" />
 
-      <Button fx:id="identifyEmployeesBtn" layoutX="387.0" layoutY="353.0" mnemonicParsing="false" style="-fx-background-color: gold;" text="Identify Employees " textAlignment="CENTER" onAction="#handleIdentifyEmployees">
+      <Button fx:id="sendForAllBtn" layoutX="252.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleSendForAll" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: gold;" text="Send" textAlignment="CENTER">
          <effect><Glow level="0.0" /></effect>
          <font><Font name="Consolas Bold Italic" size="17.0" /></font>
       </Button>
-
-      <Button fx:id="sendForAllBtn" layoutX="420.0" layoutY="314.0" mnemonicParsing="false" style="-fx-background-color: gold;" text="Send For All" textAlignment="CENTER" onAction="#handleSendForAll">
-         <effect><Glow level="0.0" /></effect>
-         <font><Font name="Consolas Bold Italic" size="17.0" /></font>
-      </Button>
-
-      <Button layoutX="23.0" layoutY="353.0" mnemonicParsing="false" style="-fx-background-color: red;" text="CancelSending" textAlignment="CENTER" textFill="#f8f8f4">
-         <font><Font name="Consolas Bold Italic" size="17.0" /></font>
-         <effect><Glow /></effect>
-      </Button>
-
-      <Pane layoutX="95.0" layoutY="76.0" prefHeight="224.0" prefWidth="428.0" style="-fx-background-color: gold;">
-         <effect><InnerShadow /></effect>
-         <children>
-            <Text layoutX="48.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 17; -fx-font-weight: bold italic;" text="Enter The Message" />
-            <TextField fx:id="messageField" layoutX="48.0" layoutY="77.0" prefHeight="95.0" prefWidth="330.0" />
-         </children>
-      </Pane>
+      <TextArea fx:id="messageField" layoutX="157.0" layoutY="111.0" prefHeight="178.0" prefWidth="287.0" promptText="Enter your message" />
    </children>
 </AnchorPane>
