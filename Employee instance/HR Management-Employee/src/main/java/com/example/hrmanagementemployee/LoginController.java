@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -19,6 +20,8 @@ public class LoginController extends Application {
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeeLogin.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Employee Login");
+stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("icon.png")));
+
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
@@ -63,6 +66,8 @@ public class LoginController extends Application {
             loader.setControllerFactory(param -> new EmployeePageController(empId));
 
             Parent root = loader.load();
+            stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("icon.png")));
+
             stage.setScene(new Scene(root));
             stage.setTitle("Employee Page");
             stage.show();

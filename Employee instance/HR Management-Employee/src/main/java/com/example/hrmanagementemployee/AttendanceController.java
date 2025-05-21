@@ -11,26 +11,42 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 public class AttendanceController {
 
     @FXML private TableView<AttendanceModel> attendanceTable;
     @FXML private TableColumn<AttendanceModel, String> attendanceIdCol;
-    @FXML private TableColumn<AttendanceModel, String> employeeIdCol;
     @FXML private TableColumn<AttendanceModel, String> attendDateCol;
     private int empID;
     
+       @FXML
+    private Pane titleBar;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button minimizeButton;
+      private double xOffset = 0;
+    private double yOffset = 0;
     public AttendanceController(int empID) {
         this.empID = empID;
     }
-
     public void initialize() {
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
         attendanceIdCol.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getAttendanceId())));
-        employeeIdCol.setCellValueFactory(cellData ->
-                new SimpleStringProperty(String.valueOf(cellData.getValue().getEmployeeId())));
         attendDateCol.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getAttendDate().toString()));
 
@@ -54,7 +70,6 @@ public class AttendanceController {
                 while (rs.next()) {
                     AttendanceModel attendance = new AttendanceModel();
                     attendance.setAttendanceId(rs.getInt("AttendanceID"));
-                    attendance.setEmployeeId(rs.getInt("EmployeeID"));
                     attendance.setAttendDate(rs.getTimestamp("AttendDate"));
 
                     list.add(attendance);

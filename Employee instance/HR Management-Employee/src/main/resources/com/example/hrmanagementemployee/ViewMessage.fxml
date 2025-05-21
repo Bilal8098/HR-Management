@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hrmanagementemployee.ViewMessage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementemployee.ViewMessage">
     <children>
-        <Text fill="#ffc605" layoutX="28.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Employee Instance">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Text>
-        <Text fill="WHITE" layoutX="225.0" layoutY="71.0" text="Message View">
+        <Text fill="#ffc605" layoutX="185.0" layoutY="65.0" text="Announced messages">
             <font>
                 <Font name="System Bold Italic" size="23.0" />
             </font>
         </Text>
-        <TableView fx:id="messageTable" layoutX="31.0" layoutY="101.0" prefHeight="236.0" prefWidth="553.0">
-            <columns>
-                <TableColumn fx:id="messageIdColumn" prefWidth="91.0" text="Message ID" />
-                <TableColumn fx:id="messageTextColumn" prefWidth="267.0" text="Message Text" />
-                <TableColumn fx:id="createdAtColumn" prefWidth="150.0" text="Created At" />
-            </columns>
-        </TableView>
-        <Button fx:id="backButton" layoutX="480.0" layoutY="347.0" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: gold;" text="Back" onAction="#handleBackButtonAction">
+       <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="31.0" layoutY="101.0" prefHeight="236.0" prefWidth="553.0" style="-fx-background: transparent;">
+            <content>
+                <!-- wrap cards to next row -->
+                <FlowPane fx:id="cardContainer" hgap="10.0" prefWrapLength="550" style="-fx-background-color: transparent;" vgap="10.0" />
+            </content>
+        </ScrollPane>
+
+        <Button fx:id="backButton" layoutX="480.0" layoutY="347.0" onAction="#handleBackButtonAction" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: gold;" text="Back">
             <font>
                 <Font name="System Bold Italic" size="16.0" />
             </font>

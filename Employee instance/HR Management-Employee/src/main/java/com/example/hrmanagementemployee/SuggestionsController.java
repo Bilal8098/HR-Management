@@ -12,14 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 public class SuggestionsController implements Initializable {
 
     private final int empID;
 
-    @FXML
-    private TextField SuggestionField;
+@FXML    private TextArea SuggestionField;
 
     @FXML
     private Button postSuggestion;
@@ -58,7 +57,6 @@ public class SuggestionsController implements Initializable {
             stmt.executeUpdate();
 
             showAlert(Alert.AlertType.INFORMATION, "Posted", "Your Suggestion has been submitted.");
-            SuggestionField.clear();
 
         } catch (SQLException e) {
             e.printStackTrace();

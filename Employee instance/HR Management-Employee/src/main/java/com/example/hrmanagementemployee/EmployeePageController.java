@@ -6,17 +6,49 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class EmployeePageController {
     private final int empID;
+        @FXML
+    private Pane titleBar;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button minimizeButton;
     @FXML
     private Button viewAttendance;
+    private double xOffset = 0;
+    private double yOffset = 0;
+    @FXML
+    private void initialize() {
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
 
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
     public EmployeePageController(int id) {
         this.empID = id;
+    }
+      @FXML
+    private void closeWindow() {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) minimizeButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @FXML
@@ -45,7 +77,8 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new EmployeePDFsController(empID));
 
             Stage stage = new Stage();
-            stage.setTitle("Employee PDFs");
+            stage.setTitle("Salaries report");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
 
@@ -61,6 +94,7 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new RequestVacationController(empID));
 
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setTitle("Request Vacation");
             stage.setScene(new Scene(loader.load()));
             stage.show();
@@ -77,6 +111,7 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
 
             Stage stage = new Stage();
+             stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setTitle("View vacations request");
             stage.setScene(new Scene(loader.load()));
             stage.show();
@@ -94,6 +129,7 @@ public class EmployeePageController {
 
             Stage stage = new Stage();
             stage.setTitle("Post a Complaint");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
         } catch (Exception e) {
@@ -108,6 +144,7 @@ public class EmployeePageController {
 
             Stage stage = new Stage();
             stage.setTitle("Post a Suggestion");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setScene(new Scene(loader.load()));
             stage.show();
         } catch (Exception e) {
@@ -128,6 +165,7 @@ public class EmployeePageController {
             // Create a new stage (window) for the view message page
             Stage stage = new Stage();
             stage.setTitle("View Messages");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
             stage.setScene(new Scene(viewMessagePage));
             stage.show();
 

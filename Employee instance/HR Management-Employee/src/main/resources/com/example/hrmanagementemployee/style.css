@@ -89,3 +89,41 @@
 .top-bar {
     -fx-padding: 10 10 10 10;
 }
+
+.text-area {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #FFD700;
+    -fx-border-color: #FFD700; /* Gold border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+}
+
+/* Style the internal text content area of TextArea */
+.text-area .content {
+    -fx-background-color: #1e1e1e;
+    -fx-padding: 8px;
+}
+
+.message-card {
+    -fx-background-color: #2a2a2a;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #ffc605;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 1);
+    -fx-min-width: 250;
+    -fx-max-width: 250;
+}
+
+.message-card .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+}
+
+.message-card .label:first {
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffc605;
+}
