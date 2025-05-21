@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,6 +22,27 @@ public class MainController {
     @FXML
     private Button viewAttendances;
 
+       @FXML
+    private Pane titleBar;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button minimizeButton;
+      private double xOffset = 0;
+    private double yOffset = 0;
+
+     public void initialize() {
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
     public void viewEmps() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("viewEmployees.fxml"));
@@ -42,6 +64,8 @@ public class MainController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Attendance Table");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -55,8 +79,10 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportsView.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Employee PDFs");
+            stage.setTitle("Salaries reports");
             stage.setScene(new Scene(loader.load()));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,26 +95,29 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("complaint-view.fxml"));
             Parent complaintRoot = loader.load();
-            
+
             Stage stage = new Stage();
             stage.setScene(new Scene(complaintRoot));
             stage.setTitle("Complaints");
-            stage.initStyle(StageStyle.UNDECORATED);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+            
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Failed to open Complaints page.");
         }
     }
-    
 
     @FXML
     private void viewSuggestions() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementmanager/ViewSuggestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/hrmanagementmanager/ViewSuggestion.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Suggestions");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -100,11 +129,14 @@ public class MainController {
     @FXML
     private void goToAnnounceMessage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementmanager/AnnounceMessage.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/hrmanagementmanager/AnnounceMessage.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Announce Messages");
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icon.png")));
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,12 +144,22 @@ public class MainController {
         }
     }
 
-
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+ @FXML
+    private void closeWindow() {
+        Stage stage = (Stage) viewEmps.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) viewEmps.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

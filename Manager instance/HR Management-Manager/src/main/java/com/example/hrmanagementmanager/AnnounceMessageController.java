@@ -1,33 +1,18 @@
 package com.example.hrmanagementmanager;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AnnounceMessageController implements Initializable {
-
     @FXML
-    private TableView<Message> messageTable;  // Use <Message> instead of <Object>
-
-    @FXML
-    private TableColumn<Message, Integer> colMessageId;
-
-    @FXML
-    private TableColumn<Message, String> colMessageText;
-
-    @FXML
-    private TableColumn<Message, Timestamp> colCreatedAt;
-
-    private ObservableList<Message> messageList = FXCollections.observableArrayList();
+    private Button send;
+    @FXML private TextArea message;
 
     private Connection connectDB() {
         // Update your DB details here
@@ -44,43 +29,37 @@ public class AnnounceMessageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadMessages();
+    send.setOnAction(e -> insertMessage());
     }
 
-    private void loadMessages() {
-        Connection conn = connectDB();
-        if (conn == null) {
-            System.out.println("Database connection failed.");
-            return;
-        }
-
-        String query = "SELECT message_id, message_text, created_at FROM messages";
-
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            messageList.clear();
-
-            while (rs.next()) {
-                messageList.add(new Message(
-                        rs.getInt("message_id"),
-                        rs.getString("message_text"),
-                        rs.getTimestamp("created_at")
-                ));
-            }
-
-            colMessageId.setCellValueFactory(new PropertyValueFactory<>("messageId"));
-            colMessageText.setCellValueFactory(new PropertyValueFactory<>("messageText"));
-            colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-
-            // Optional: wrap in SortedList if you want sorting
-            SortedList<Message> sortedList = new SortedList<>(messageList);
-            messageTable.setItems(sortedList);
-
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private void insertMessage() {
+    Connection conn = connectDB();
+    if (conn == null) {
+        System.out.println("Database connection failed.");
+        return;
     }
+
+    String msgText = message.getText();
+    if (msgText == null || msgText.trim().isEmpty()) {
+        System.out.println("Message is empty. Not inserting.");
+        return;
+    }
+
+    String query = "INSERT INTO messages (message_text, created_at) VALUES (?, CURRENT_TIMESTAMP)";
+
+    try {
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, msgText);
+        int rowsInserted = pstmt.executeUpdate();
+
+        if (rowsInserted > 0) {
+            System.out.println("Message inserted successfully!");
+            message.clear(); // Clear the text area after sending
+        }
+
+        conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 }

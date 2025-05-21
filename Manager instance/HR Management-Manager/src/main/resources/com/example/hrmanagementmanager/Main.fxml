@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="712.0" style="-fx-border-color: gold;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hrmanagementmanager.MainController">
    <children>
-      <Button fx:id="viewEmps" layoutX="256.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewEmps" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View employees" />
-      <Button fx:id="viewAttendances" layoutX="36.0" layoutY="101.0" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View attendances">
+      <Button fx:id="viewEmps" layoutX="252.0" layoutY="251.0" mnemonicParsing="false" onAction="#viewEmps" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View employees" />
+      <Button fx:id="viewAttendances" layoutX="32.0" layoutY="135.0" mnemonicParsing="false" onAction="#viewAttendance" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View attendances">
          <font>
             <Font size="29.0" />
          </font></Button>
-      <Button layoutX="256.0" layoutY="101.0" mnemonicParsing="false" onAction="#openReportsPage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View reports" />
-      <Button fx:id="viewComplaints" layoutX="36.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewComplaints" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Complaints" />
-      <Text fill="#e4a40e" fontSmoothingType="LCD" layoutX="30.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-effect: shadow;" text="Manager Management">
+      <Button layoutX="252.0" layoutY="135.0" mnemonicParsing="false" onAction="#openReportsPage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View reports" />
+      <Button fx:id="viewComplaints" layoutX="32.0" layoutY="251.0" mnemonicParsing="false" onAction="#viewComplaints" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Complaints" />
+      <Text fill="#ffc605" fontSmoothingType="LCD" layoutX="256.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 25;" text="Manager Control">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="viewEmps11" layoutX="483.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewSuggestions" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Suggestions" />
-      <Button fx:id="viewEmps111" layoutX="483.0" layoutY="101.0" mnemonicParsing="false" onAction="#goToAnnounceMessage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="Announce Message" />
+      <Button fx:id="viewEmps11" layoutX="479.0" layoutY="251.0" mnemonicParsing="false" onAction="#viewSuggestions" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="View Suggestions" />
+      <Button fx:id="viewEmps111" layoutX="479.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToAnnounceMessage" prefHeight="90.0" prefWidth="202.0" styleClass="loginButton" text="Announce Message" />
+      <Pane fx:id="titleBar" layoutX="21.0" layoutY="6.0" prefHeight="63.0" prefWidth="685.0">
+         <children>
+            <Button fx:id="minimizeButton" layoutX="591.0" layoutY="13.0" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15pt;" text="-" textFill="#ebeae5" />
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="3.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Icon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeButton" layoutX="637.0" layoutY="19.0" minWidth="34.0" onAction="#closeWindow" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 10pt;" text="✖" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

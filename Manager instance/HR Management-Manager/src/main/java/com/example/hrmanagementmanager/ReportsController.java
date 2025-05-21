@@ -53,7 +53,9 @@ public class ReportsController {
                 );
 
                 Label idLabel = new Label("Report ID: " + reportId);
+                idLabel.setStyle("-fx-text-fill: white;");
                 Label dateLabel = new Label("Date: " + reportDate.toString());
+                dateLabel.setStyle("-fx-text-fill: white;");
                 Button viewButton = new Button("View PDF");
                 viewButton.getStyleClass().add("loginButton");
                 viewButton.setOnAction(e -> openPDF(reportId));
