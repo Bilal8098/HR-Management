@@ -54,7 +54,7 @@ Each instance contains a precompiled JAR file located in its respective folder i
 3. Run the included batch file (`run.bat`) to launch the application.
 
 **Example:**  
-```bash
+
 cd Releases/Attendance
 run.bat
 The batch files are pre-configured to include the necessary JavaFX libraries from the SDK to run the application smoothly.
@@ -98,5 +98,5 @@ Thank you for using the HR Management System!
 1. Place your screenshot (e.g., `app_screenshot.png`) inside the `Releases` folder or a dedicated folder like `docs/images/`.
 2. Update the image path in the markdown:
 
-```md
+md
 ![HR Management Application](./Releases/Icon.png)
