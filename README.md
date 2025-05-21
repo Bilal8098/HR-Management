@@ -1,6 +1,6 @@
 # HR Management System
 
-![HR Management Application](./Releases/Icon.png)  
+<img src="./Releases/Icon.png" alt="HR Management Application" style="width:400px; height:auto;" />
 *Screenshot of the HR Management Application*
 
 ---
@@ -61,20 +61,5 @@ The Releases folder contains fully executable releases for quick deployment and 
 
 JavaFX SDK must always be kept inside the Releases folder for the batch scripts to work properly.
 
-Contributing
-Contributions are welcome! Please fork the repository and submit pull requests for any features, bug fixes, or improvements.
-
-License
-Specify your license here (e.g., MIT License).
-
-Contact
-For any questions or support, please contact:
-
-Your Name
-Email: your.email@example.com
-
 Thank you for using the HR Management System!
 ```
----
-md
-![HR Management Application](./Releases/Icon.png)
