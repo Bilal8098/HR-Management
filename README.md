@@ -69,7 +69,7 @@ java --module-path "../javafx-sdk-17.0.15/lib" --add-modules javafx.controls,jav
 ## Support
 
 For technical support or contributions:
-- Open a [GitHub Issue](https://github.com/HR-Management/issues)
+- Open a [GitHub Issue](https://github.com/Bilal8098/HR-Management/issues)
 - Contact our leadership team:
 
 **Project Leadership:**
