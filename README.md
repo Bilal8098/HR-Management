@@ -1,7 +1,6 @@
 # HR Management System
 
 <img src="./Releases/Icon.png" alt="HR Management Application" style="width:400px; height:auto;" />
-*Screenshot of the HR Management Application*
 
 ---
 
@@ -37,8 +36,7 @@ Each instance contains a precompiled JAR file located in its respective folder i
 2. Open the folder of the desired instance inside `Releases` (e.g., `Releases/Attendance`).
 3. Run the included batch file (`run.bat`) to launch the application.
 
-**Example:**  
-
+Example:
 cd Releases/Attendance instance
 Attendance.bat
 The batch files are pre-configured to include the necessary JavaFX libraries from the SDK to run the application smoothly.
@@ -63,13 +61,26 @@ JavaFX SDK must always be kept inside the Releases folder for the batch scripts 
 
 Thank you for using the HR Management System!
 ```
+## To run manually
+Run this command in a CMD in the Releases directory
+```bash
+java --module-path "../javafx-sdk-17.0.15/lib" --add-modules javafx.controls,javafx.fxml -jar target/Replace_with_jar_name.jar
+```
 ## Support
-For issues or contributions, please open a GitHub issue or contact the development team.
-Team members:
-- Leader: **Bilal Ahmed**  
-- Co-leader: **Roaya Youssef**
+
+For technical support or contributions:
+- Open a [GitHub Issue](https://github.com/HR-Management/issues)
+- Contact our leadership team:
+
+**Project Leadership:**
+- **Bilal Ahmed** (Project Lead)  
+  Email: [reddivel8098@gmail.com](mailto:reddivel8098@gmail.com)  
+  Phone: [+201141511177] 
+
+**Development Team:**
+- **Co-leader: Roaya Youssef**
 - Seif Sayed
-- Kareem Salem
+- Kareem Salem 
 - Shams Mohammed
 - Ahmed Hamdy
 
