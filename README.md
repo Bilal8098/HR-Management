@@ -63,3 +63,13 @@ JavaFX SDK must always be kept inside the Releases folder for the batch scripts 
 
 Thank you for using the HR Management System!
 ```
+## Support
+For issues or contributions, please open a GitHub issue or contact the development team.
+Team members:
+- Leader: **Bilal Ahmed**  
+- Co-leader: **Roaya Youssef**
+- Seif Sayed
+- Kareem Salem
+- Shams Mohammed
+- Ahmed Hamdy
+© 2024 HR Management System | Developed with JavaFX
