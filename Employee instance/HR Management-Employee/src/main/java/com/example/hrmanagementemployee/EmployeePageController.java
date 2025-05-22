@@ -40,9 +40,7 @@ public class EmployeePageController {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });
-        if (hello.getText() != null) {
-            hello.setText(hello.getText().replace("User", empName));
-        }
+            hello.setText(hello.getText().replace("User", empName)); 
     }
 
     public EmployeePageController(int id, String empName) {
