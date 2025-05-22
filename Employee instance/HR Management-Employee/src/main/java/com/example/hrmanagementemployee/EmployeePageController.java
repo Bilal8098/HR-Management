@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -13,7 +14,10 @@ import javafx.stage.StageStyle;
 
 public class EmployeePageController {
     private final int empID;
-        @FXML
+    private final String empName;
+    @FXML
+    private Label hello;
+    @FXML
     private Pane titleBar;
     @FXML
     private Button closeButton;
@@ -23,6 +27,7 @@ public class EmployeePageController {
     private Button viewAttendance;
     private double xOffset = 0;
     private double yOffset = 0;
+
     @FXML
     private void initialize() {
         titleBar.setOnMousePressed(event -> {
@@ -35,11 +40,17 @@ public class EmployeePageController {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });
+        if (hello.getText() != null) {
+            hello.setText(hello.getText().replace("User", empName));
+        }
     }
-    public EmployeePageController(int id) {
+
+    public EmployeePageController(int id, String empName) {
         this.empID = id;
+        this.empName = empName;
     }
-      @FXML
+
+    @FXML
     private void closeWindow() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -111,7 +122,7 @@ public class EmployeePageController {
             loader.setControllerFactory(param -> new ViewVacationRequestsController(empID));
 
             Stage stage = new Stage();
-             stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
             stage.setTitle("View vacations request");
             stage.setScene(new Scene(loader.load()));
             stage.show();
@@ -136,6 +147,7 @@ public class EmployeePageController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void openSuggestionWindow() {
         try {
@@ -159,7 +171,8 @@ public class EmployeePageController {
     private void viewMessagesAction() {
         try {
             // Corrected the path to ViewMessage.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hrmanagementemployee/ViewMessage.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/hrmanagementemployee/ViewMessage.fxml"));
             Pane viewMessagePage = loader.load();
 
             // Create a new stage (window) for the view message page

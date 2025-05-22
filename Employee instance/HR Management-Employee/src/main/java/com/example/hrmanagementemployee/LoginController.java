@@ -35,45 +35,49 @@ stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("Icon.p
      * Validates login credentials.
      * Returns the employee ID if valid, otherwise returns 0 or -1 for failure.
      */
-    public static int validateLogin(String employeeIdStr, String password) {
-        String sql = "SELECT employeeid FROM employees WHERE employeeid = ? AND password = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+public static Employee validateLogin(String employeeIdStr, String password) {
+    String sql = "SELECT employeeid, fullname FROM employees WHERE employeeid = ? AND password = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int employeeId = Integer.parseInt(employeeIdStr);
-            stmt.setInt(1, employeeId);
-            stmt.setString(2, password);
+        int employeeId = Integer.parseInt(employeeIdStr);
+        stmt.setInt(1, employeeId);
+        stmt.setString(2, password);
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("employeeid");  // Success: return valid employee ID
-            } else {
-                return 0; // No match
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1; // Error
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            int id = rs.getInt("employeeid");
+            String name = rs.getString("fullname");
+            return new Employee(id, name); // Return both ID and name
+        } else {
+            return null; // No match
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
     }
+}
+
 
     /**
      * Opens the Employee Page and passes the employee ID to the controller.
      */
-    public static void openEmployeePage(Stage stage, int empId) {
-        try {
-            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeePage.fxml"));
-            loader.setControllerFactory(param -> new EmployeePageController(empId));
+    public static void openEmployeePage(Stage stage, Employee employee) {
+    try {
+        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("EmployeePage.fxml"));
+        loader.setControllerFactory(param -> new EmployeePageController(employee.getId(), employee.getName()));
 
-            Parent root = loader.load();
-            stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("Icon.png")));
+        Parent root = loader.load();
+        stage.getIcons().add(new Image(LoginController.class.getResourceAsStream("Icon.png")));
 
-            stage.setScene(new Scene(root));
-            stage.setTitle("Employee Page");
-            stage.show();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Employee Page");
+        stage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 }

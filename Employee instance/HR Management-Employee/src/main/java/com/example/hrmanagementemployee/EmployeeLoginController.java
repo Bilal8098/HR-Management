@@ -41,24 +41,24 @@ public class EmployeeLoginController {
         });
     }
 
-    private void handleLogin() {
-        String empId = employeeIdField.getText();
-        String pass = passwordField.getText();
+   private void handleLogin() {
+    String empId = employeeIdField.getText();
+    String pass = passwordField.getText();
 
-        if (empId.isEmpty() || pass.isEmpty()) {
-            showAlert("Please enter Employee ID and Password.");
-            return;
-        }
-
-        int loginResult = LoginController.validateLogin(empId, pass);
-
-        if (loginResult > 0) {
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            LoginController.openEmployeePage(stage, loginResult);
-        } else {
-            showAlert("Invalid Employee ID or Password.");
-        }
+    if (empId.isEmpty() || pass.isEmpty()) {
+        showAlert("Please enter Employee ID and Password.");
+        return;
     }
+
+    Employee employee = LoginController.validateLogin(empId, pass);
+
+    if (employee != null) {
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        LoginController.openEmployeePage(stage, employee);
+    } else {
+        showAlert("Invalid Employee ID or Password.");
+    }
+}
 
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
