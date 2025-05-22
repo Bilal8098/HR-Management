@@ -19,12 +19,26 @@ Each module is developed as a separate project within this repository to provide
 
 ## Prerequisites
 
-- A **JavaFX SDK** is required to run the released JAR files.  
+Before running the application, ensure your system meets the following requirements:
 
-download the [JavaFX SDK](https://gluonhq.com/products/javafx/) Depending on your own java version
+### ✅ Java Version
+- You must have **Java 11 or newer** installed.
 
+You can download the latest Java JDK from the official Oracle site:
+- [Java download](https://www.oracle.com/java/technologies/downloads/)
+- or you can downlaod java 17 by [Clicking here](https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/17.0.15%2B9/4f092786cec841d58ae21840b10204d7/jdk-17.0.15_windows-x64_bin.zip)
 
-After downloading, unzip the SDK and place the entire folder inside the `Releases` directory in this repository.
+### ✅ JavaFX SDK
+
+This application was developed using **JavaFX SDK 17**. You must download and link this SDK to run the app.
+
+#### 🔽 Download JavaFX SDK 17.0.15
+
+- You can browse all versions by accessing [JavaFX official download page](https://gluonhq.com/products/javafx/)
+- Or you can simply [Click here](https://download2.gluonhq.com/openjfx/17.0.15/openjfx-17.0.15_windows-x64_bin-sdk.zip) to download JavaFX SDK 17.0.15 for Windows (x64)
+
+> After downloading, unzip the SDK and place the entire folder inside the `Releases` directory of this repository.
+
 
 ---
 
