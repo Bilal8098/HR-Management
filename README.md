@@ -19,10 +19,10 @@ Each module is developed as a separate project within this repository to provide
 
 ## Prerequisites
 
-- **JavaFX SDK 17.0.15** required to run the released JAR files.  
+- A **JavaFX SDK** is required to run the released JAR files.  
 
-You can download the JavaFX SDK for Windows here:  
-[JavaFX SDK 17.0.15 - Windows x64](https://download2.gluonhq.com/openjfx/17.0.15/openjfx-17.0.15_windows-x64_bin-sdk.zip)  
+download the [JavaFX SDK](https://gluonhq.com/products/javafx/) Depending on your own java version
+
 
 After downloading, unzip the SDK and place the entire folder inside the `Releases` directory in this repository.
 
