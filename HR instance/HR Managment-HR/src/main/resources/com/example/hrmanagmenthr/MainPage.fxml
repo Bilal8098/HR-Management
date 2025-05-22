@@ -25,7 +25,7 @@
     </TableView>
    <HBox layoutX="39.0" layoutY="83.0" spacing="20.0">
       <children>
-          <Button onAction="#handleSearch" prefHeight="27.0" prefWidth="98.0" styleClass="loginButton" text="Search" />
+          <Button fx:id="searchButton" onAction="#handleSearch" prefHeight="27.0" prefWidth="98.0" styleClass="loginButton" text="Search" />
           
           <!-- Buttons (placed outside the TableView) -->
           <Button onAction="#handleAddEmployee" styleClass="loginButton" text="Add Employee" />

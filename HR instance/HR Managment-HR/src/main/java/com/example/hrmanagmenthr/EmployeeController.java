@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import com.example.hrmanagmenthr.PDFGeneration.SalaryReportGenerator;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -93,6 +94,7 @@ public class EmployeeController {
     private Button viewAttendance;
     @FXML private Button resetSalary;
 
+    @FXML private Button searchButton;
     public void initialize() {
         titleBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -121,6 +123,22 @@ public class EmployeeController {
             employeeTable.getScene().getStylesheets().add(
                     getClass().getResource("styles.css").toExternalForm());
         }
+        ChangeListener<String> anyTextChanged = (obs, oldV, newV) -> updateSearchButtonText();
+        searchField.textProperty().addListener(anyTextChanged);
+        searchField1.textProperty().addListener(anyTextChanged);
+        searchField11.textProperty().addListener(anyTextChanged);
+        searchField111.textProperty().addListener(anyTextChanged);
+
+        // make sure it’s correct on startup
+        updateSearchButtonText();
+    }
+     private void updateSearchButtonText() {
+        boolean anyEmpty = searchField.getText().trim().isEmpty()
+                        && searchField1.getText().trim().isEmpty()
+                        && searchField11.getText().trim().isEmpty()
+                        && searchField111.getText().trim().isEmpty();
+
+        searchButton.setText(anyEmpty ? "Refresh" : "Search");
     }
 private Stage loadingStage;
 
@@ -214,6 +232,11 @@ private void handleResetSalary(ActionEvent event) {
      * Combines search criteria from 4 text fields using OR logic.
      */
     public void handleSearch(ActionEvent event) {
+              if ("Refresh".equals(searchButton.getText())) {
+            // user wants to reload everything
+            loadAllEmployees();
+            return;
+        }
         // Retrieve values from the search fields
         String idKeyword = searchField.getText().trim();
         String nameKeyword = searchField1.getText().trim();
