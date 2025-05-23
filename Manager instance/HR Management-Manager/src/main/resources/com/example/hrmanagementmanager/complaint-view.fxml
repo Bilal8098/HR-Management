@@ -21,7 +21,7 @@
             </HBox>
 
             <ScrollPane fx:id="scrollPane" fitToWidth="true" styleClass="scroll-pane">
-                <FlowPane fx:id="cardsContainer" hgap="10" prefHeight="71.0" prefWidth="579.0" prefWrapLength="580" styleClass="cards-container" vgap="10" />
+                <FlowPane fx:id="cardsContainer" hgap="10" prefHeight="326.0" prefWidth="596.0" prefWrapLength="580" styleClass="cards-container" vgap="10" />
             </ScrollPane>
         </VBox>
     </children>
