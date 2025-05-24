@@ -49,9 +49,14 @@ public class RequestVacationController implements Initializable {
 
         java.time.LocalDate start = startDate.getValue();
         java.time.LocalDate end = endDate.getValue();
+        java.time.LocalDate today = java.time.LocalDate.now();
 
         if (end.isBefore(start)) {
             showAlert(Alert.AlertType.WARNING, "Invalid Dates", "End date cannot be before start date.");
+            return;
+        }
+        else if(start.isBefore(today.plusDays(1))){
+         showAlert(Alert.AlertType.WARNING, "Invalid Dates", "Start date cannot be before tomorrow.");
             return;
         }
 
